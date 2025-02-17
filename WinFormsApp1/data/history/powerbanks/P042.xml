@@ -1,0 +1,72 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<operations>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1472</userID>
+    <sdatetimeSTR>11.11.2022 9:24:45</sdatetimeSTR>
+    <edatetimeSTR>11.11.2022 21:24:14</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>0034</userID>
+    <sdatetimeSTR>12.11.2022 9:26:24</sdatetimeSTR>
+    <edatetimeSTR>12.11.2022 9:26:50</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1427</userID>
+    <sdatetimeSTR>12.11.2022 9:30:02</sdatetimeSTR>
+    <edatetimeSTR>12.11.2022 11:06:57</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>2860</userID>
+    <sdatetimeSTR>12.11.2022 11:35:50</sdatetimeSTR>
+    <edatetimeSTR>12.11.2022 18:58:00</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>0289</userID>
+    <sdatetimeSTR>12.11.2022 18:58:00</sdatetimeSTR>
+    <edatetimeSTR>13.11.2022 9:09:57</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>0919</userID>
+    <sdatetimeSTR>13.11.2022 5:50:40</sdatetimeSTR>
+    <edatetimeSTR>13.11.2022 20:42:56</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>0653</userID>
+    <sdatetimeSTR>13.11.2022 9:16:32</sdatetimeSTR>
+    <edatetimeSTR>18.12.2022 10:26:47</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>0064</userID>
+    <sdatetimeSTR>18.12.2022 10:26:20</sdatetimeSTR>
+    <edatetimeSTR>22.12.2022 23:58:27</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>0078</userID>
+    <sdatetimeSTR>22.12.2022 18:55:41</sdatetimeSTR>
+    <edatetimeSTR>23.12.2022 19:18:32</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P042</deviceID>
+    <userID>1734</userID>
+    <sdatetimeSTR>23.12.2022 19:17:48</sdatetimeSTR>
+    <edatetimeSTR>03.02.2024 13:24:24</edatetimeSTR>
+  </operation>
+</operations>

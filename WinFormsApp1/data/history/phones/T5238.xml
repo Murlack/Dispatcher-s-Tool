@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<operations>
+  <operation>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>2009</userID>
+    <sdatetimeSTR>11.12.2022 13:03:00</sdatetimeSTR>
+    <edatetimeSTR>13.12.2022 11:27:07</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T5238</deviceID>
+    <userID>0385</userID>
+    <sdatetimeSTR>13.12.2022 20:21:42</sdatetimeSTR>
+    <edatetimeSTR>
+    </edatetimeSTR>
+  </operation>
+</operations>

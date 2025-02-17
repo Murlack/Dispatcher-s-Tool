@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<operations>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>0000</userID>
+    <sdatetimeSTR>26.10.2001 16:52:10</sdatetimeSTR>
+    <edatetimeSTR>26.10.2001 16:52:11</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2170</deviceID>
+    <userID>2407</userID>
+    <sdatetimeSTR>08.02.2025 21:01:06</sdatetimeSTR>
+    <edatetimeSTR>08.02.2025 21:07:17</edatetimeSTR>
+  </operation>
+</operations>

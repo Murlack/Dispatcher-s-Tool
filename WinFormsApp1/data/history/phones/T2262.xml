@@ -1,0 +1,160 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<operations>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>0000</userID>
+    <sdatetimeSTR>26.10.2001 16:52:10</sdatetimeSTR>
+    <edatetimeSTR>26.10.2001 16:52:11</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>0123</userID>
+    <sdatetimeSTR>13.01.2025 18:09:36</sdatetimeSTR>
+    <edatetimeSTR>13.01.2025 18:10:41</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>0123</userID>
+    <sdatetimeSTR>14.01.2025 14:18:48</sdatetimeSTR>
+    <edatetimeSTR>14.01.2025 14:22:08</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3376</userID>
+    <sdatetimeSTR>15.01.2025 23:16:19</sdatetimeSTR>
+    <edatetimeSTR>16.01.2025 9:06:25</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3877</userID>
+    <sdatetimeSTR>16.01.2025 22:51:59</sdatetimeSTR>
+    <edatetimeSTR>17.01.2025 8:37:24</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3829</userID>
+    <sdatetimeSTR>18.01.2025 9:07:17</sdatetimeSTR>
+    <edatetimeSTR>19.01.2025 8:28:09</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>0123</userID>
+    <sdatetimeSTR>19.01.2025 18:06:53</sdatetimeSTR>
+    <edatetimeSTR>19.01.2025 20:48:24</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>1739</userID>
+    <sdatetimeSTR>21.01.2025 8:48:46</sdatetimeSTR>
+    <edatetimeSTR>21.01.2025 20:52:20</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>0133</userID>
+    <sdatetimeSTR>23.01.2025 8:20:38</sdatetimeSTR>
+    <edatetimeSTR>23.01.2025 20:42:07</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3482</userID>
+    <sdatetimeSTR>24.01.2025 8:47:34</sdatetimeSTR>
+    <edatetimeSTR>24.01.2025 20:34:49</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3312</userID>
+    <sdatetimeSTR>26.01.2025 8:58:27</sdatetimeSTR>
+    <edatetimeSTR>26.01.2025 18:14:54</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3072</userID>
+    <sdatetimeSTR>28.01.2025 12:41:05</sdatetimeSTR>
+    <edatetimeSTR>28.01.2025 15:06:35</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3894</userID>
+    <sdatetimeSTR>28.01.2025 18:21:21</sdatetimeSTR>
+    <edatetimeSTR>28.01.2025 18:21:33</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>2942</userID>
+    <sdatetimeSTR>28.01.2025 20:10:43</sdatetimeSTR>
+    <edatetimeSTR>29.01.2025 8:30:45</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>2127</userID>
+    <sdatetimeSTR>29.01.2025 20:13:30</sdatetimeSTR>
+    <edatetimeSTR>30.01.2025 8:24:36</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>0459</userID>
+    <sdatetimeSTR>30.01.2025 20:26:42</sdatetimeSTR>
+    <edatetimeSTR>31.01.2025 8:51:54</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>0123</userID>
+    <sdatetimeSTR>31.01.2025 20:50:06</sdatetimeSTR>
+    <edatetimeSTR>01.02.2025 8:45:37</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3853</userID>
+    <sdatetimeSTR>01.02.2025 20:23:58</sdatetimeSTR>
+    <edatetimeSTR>02.02.2025 8:32:37</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3411</userID>
+    <sdatetimeSTR>02.02.2025 20:28:21</sdatetimeSTR>
+    <edatetimeSTR>03.02.2025 7:42:46</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3832</userID>
+    <sdatetimeSTR>03.02.2025 21:01:27</sdatetimeSTR>
+    <edatetimeSTR>04.02.2025 8:57:39</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>0383</userID>
+    <sdatetimeSTR>04.02.2025 20:50:48</sdatetimeSTR>
+    <edatetimeSTR>05.02.2025 8:40:58</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3120</userID>
+    <sdatetimeSTR>05.02.2025 21:02:18</sdatetimeSTR>
+    <edatetimeSTR>06.02.2025 8:51:15</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>3255</userID>
+    <sdatetimeSTR>06.02.2025 20:49:34</sdatetimeSTR>
+    <edatetimeSTR>07.02.2025 8:24:21</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>2802</userID>
+    <sdatetimeSTR>07.02.2025 20:20:10</sdatetimeSTR>
+    <edatetimeSTR>08.02.2025 8:12:07</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>0586</userID>
+    <sdatetimeSTR>08.02.2025 19:55:55</sdatetimeSTR>
+    <edatetimeSTR>08.02.2025 19:58:04</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>T2262</deviceID>
+    <userID>1479</userID>
+    <sdatetimeSTR>08.02.2025 20:27:01</sdatetimeSTR>
+    <edatetimeSTR>09.02.2025 2:15:26</edatetimeSTR>
+  </operation>
+</operations>

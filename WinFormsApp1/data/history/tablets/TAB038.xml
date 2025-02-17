@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<operations>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1055</userID>
+    <sdatetimeSTR>26.12.2022 15:25:24</sdatetimeSTR>
+    <edatetimeSTR>26.12.2022 15:25:33</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>2751</userID>
+    <sdatetimeSTR>26.12.2022 20:13:02</sdatetimeSTR>
+    <edatetimeSTR>26.12.2022 21:06:10</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>2739</userID>
+    <sdatetimeSTR>26.12.2022 21:07:08</sdatetimeSTR>
+    <edatetimeSTR>26.12.2022 21:33:24</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1365</userID>
+    <sdatetimeSTR>27.12.2022 8:53:49</sdatetimeSTR>
+    <edatetimeSTR>27.12.2022 18:23:43</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1055</userID>
+    <sdatetimeSTR>15.01.2023 10:34:14</sdatetimeSTR>
+    <edatetimeSTR>15.01.2023 10:34:24</edatetimeSTR>
+  </operation>
+</operations>

@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<operations>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>
+    </userID>
+    <sdatetimeSTR>
+    </sdatetimeSTR>
+    <edatetimeSTR>
+    </edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1714</userID>
+    <sdatetimeSTR>10.10.2022 20:19:38</sdatetimeSTR>
+    <edatetimeSTR>11.10.2022 3:58:55</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>2567</userID>
+    <sdatetimeSTR>11.10.2022 20:44:45</sdatetimeSTR>
+    <edatetimeSTR>12.10.2022 1:35:02</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1181</userID>
+    <sdatetimeSTR>17.10.2022 17:44:10</sdatetimeSTR>
+    <edatetimeSTR>17.10.2022 22:40:17</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1864</userID>
+    <sdatetimeSTR>18.10.2022 5:12:26</sdatetimeSTR>
+    <edatetimeSTR>18.10.2022 8:10:52</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>2943</userID>
+    <sdatetimeSTR>19.10.2022 12:39:01</sdatetimeSTR>
+    <edatetimeSTR>19.10.2022 13:37:43</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1404</userID>
+    <sdatetimeSTR>19.10.2022 15:29:17</sdatetimeSTR>
+    <edatetimeSTR>19.10.2022 20:10:21</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1026</userID>
+    <sdatetimeSTR>27.10.2022 9:30:17</sdatetimeSTR>
+    <edatetimeSTR>27.10.2022 21:12:01</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1261</userID>
+    <sdatetimeSTR>30.10.2022 17:48:40</sdatetimeSTR>
+    <edatetimeSTR>30.10.2022 21:02:03</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1141</userID>
+    <sdatetimeSTR>30.10.2022 21:02:07</sdatetimeSTR>
+    <edatetimeSTR>31.10.2022 4:50:20</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1637</userID>
+    <sdatetimeSTR>01.11.2022 20:51:31</sdatetimeSTR>
+    <edatetimeSTR>02.11.2022 5:13:57</edatetimeSTR>
+  </operation>
+</operations>

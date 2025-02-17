@@ -1,0 +1,69 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<operations>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>
+    </userID>
+    <sdatetimeSTR>
+    </sdatetimeSTR>
+    <edatetimeSTR>
+    </edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1055</userID>
+    <sdatetimeSTR>26.12.2022 15:24:04</sdatetimeSTR>
+    <edatetimeSTR>26.12.2022 15:24:46</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>2801</userID>
+    <sdatetimeSTR>27.12.2022 20:37:11</sdatetimeSTR>
+    <edatetimeSTR>28.12.2022 8:13:01</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1275</userID>
+    <sdatetimeSTR>28.12.2022 20:51:54</sdatetimeSTR>
+    <edatetimeSTR>29.12.2022 5:02:47</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1271</userID>
+    <sdatetimeSTR>29.12.2022 20:42:50</sdatetimeSTR>
+    <edatetimeSTR>04.01.2023 21:57:18</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>2756</userID>
+    <sdatetimeSTR>06.01.2023 8:53:52</sdatetimeSTR>
+    <edatetimeSTR>06.01.2023 9:22:49</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1911</userID>
+    <sdatetimeSTR>07.01.2023 8:57:55</sdatetimeSTR>
+    <edatetimeSTR>07.01.2023 16:53:02</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1165</userID>
+    <sdatetimeSTR>08.01.2023 9:01:41</sdatetimeSTR>
+    <edatetimeSTR>08.01.2023 16:57:31</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1811</userID>
+    <sdatetimeSTR>09.01.2023 8:40:20</sdatetimeSTR>
+    <edatetimeSTR>09.01.2023 15:20:03</edatetimeSTR>
+  </operation>
+</operations>

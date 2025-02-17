@@ -1,0 +1,83 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<operations>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>1612</userID>
+    <sdatetimeSTR>03.11.2022 16:31:24</sdatetimeSTR>
+    <edatetimeSTR>03.11.2022 16:37:56</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>
+    </deviceID>
+    <userID>0064</userID>
+    <sdatetimeSTR>18.12.2022 10:41:15</sdatetimeSTR>
+    <edatetimeSTR>18.12.2022 10:41:25</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>0968</userID>
+    <sdatetimeSTR>06.03.2024 15:11:35</sdatetimeSTR>
+    <edatetimeSTR>07.03.2024 8:49:19</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>3664</userID>
+    <sdatetimeSTR>07.03.2024 16:51:03</sdatetimeSTR>
+    <edatetimeSTR>07.03.2024 17:54:48</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>0968</userID>
+    <sdatetimeSTR>15.04.2024 18:36:28</sdatetimeSTR>
+    <edatetimeSTR>16.04.2024 6:00:53</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>3258</userID>
+    <sdatetimeSTR>19.04.2024 11:35:48</sdatetimeSTR>
+    <edatetimeSTR>19.04.2024 21:07:38</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>3246</userID>
+    <sdatetimeSTR>22.04.2024 8:36:11</sdatetimeSTR>
+    <edatetimeSTR>22.04.2024 20:45:53</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>0227</userID>
+    <sdatetimeSTR>18.05.2024 9:48:57</sdatetimeSTR>
+    <edatetimeSTR>18.05.2024 20:47:16</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>0077</userID>
+    <sdatetimeSTR>30.05.2024 18:51:12</sdatetimeSTR>
+    <edatetimeSTR>30.05.2024 20:37:51</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>0123</userID>
+    <sdatetimeSTR>29.07.2024 22:35:47</sdatetimeSTR>
+    <edatetimeSTR>30.07.2024 3:46:35</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>0424</userID>
+    <sdatetimeSTR>24.08.2024 10:51:42</sdatetimeSTR>
+    <edatetimeSTR>24.08.2024 17:03:43</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>2153</userID>
+    <sdatetimeSTR>25.08.2024 8:59:30</sdatetimeSTR>
+    <edatetimeSTR>25.08.2024 18:42:36</edatetimeSTR>
+  </operation>
+  <operation>
+    <deviceID>P168</deviceID>
+    <userID>2126</userID>
+    <sdatetimeSTR>03.09.2024 9:14:12</sdatetimeSTR>
+    <edatetimeSTR>05.09.2024 9:36:58</edatetimeSTR>
+  </operation>
+</operations>
