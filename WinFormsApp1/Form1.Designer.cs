@@ -44,9 +44,6 @@ namespace WinFormsApp1
             пользователиToolStripMenuItem = new ToolStripMenuItem();
             panel1 = new Panel();
             label5 = new Label();
-            panel5 = new Panel();
-            dataGridView6 = new DataGridView();
-            label1 = new Label();
             panel4 = new Panel();
             label11 = new Label();
             label10 = new Label();
@@ -109,8 +106,6 @@ namespace WinFormsApp1
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
             menuStrip1.SuspendLayout();
             panel1.SuspendLayout();
-            panel5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView6).BeginInit();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView5).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dataGridView4).BeginInit();
@@ -262,40 +257,6 @@ namespace WinFormsApp1
             label5.Size = new Size(199, 28);
             label5.TabIndex = 6;
             label5.Text = "История устройств";
-            // 
-            // panel5
-            // 
-            panel5.BackColor = Color.FromArgb(192, 0, 0);
-            panel5.Controls.Add(dataGridView6);
-            panel5.Controls.Add(label1);
-            panel5.Location = new Point(191, 16);
-            panel5.Margin = new Padding(3, 4, 3, 4);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(843, 535);
-            panel5.TabIndex = 10;
-            // 
-            // dataGridView6
-            // 
-            dataGridView6.BackgroundColor = Color.White;
-            dataGridView6.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView6.Location = new Point(17, 91);
-            dataGridView6.Margin = new Padding(3, 4, 3, 4);
-            dataGridView6.Name = "dataGridView6";
-            dataGridView6.RowHeadersWidth = 51;
-            dataGridView6.RowTemplate.Height = 25;
-            dataGridView6.Size = new Size(790, 200);
-            dataGridView6.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.ForeColor = Color.White;
-            label1.Location = new Point(17, 15);
-            label1.Name = "label1";
-            label1.Size = new Size(118, 28);
-            label1.TabIndex = 0;
-            label1.Text = "Настройки";
             // 
             // panel4
             // 
@@ -1048,10 +1009,9 @@ namespace WinFormsApp1
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
             ClientSize = new Size(1094, 593);
+            Controls.Add(menuStrip1);
             Controls.Add(panel1);
             Controls.Add(panel6);
-            Controls.Add(panel5);
-            Controls.Add(menuStrip1);
             Controls.Add(panel3);
             Controls.Add(panel4);
             Controls.Add(panel10);
@@ -1068,9 +1028,6 @@ namespace WinFormsApp1
             menuStrip1.PerformLayout();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            panel5.ResumeLayout(false);
-            panel5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView6).EndInit();
             panel4.ResumeLayout(false);
             panel4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView5).EndInit();
@@ -1111,8 +1068,6 @@ namespace WinFormsApp1
         private Panel panel2;
         private Panel panel3;
         private Panel panel4;
-        private Panel panel5;
-        private Label label1;
         private Label label2;
         private Label label3;
         private Label label4;
@@ -1131,7 +1086,6 @@ namespace WinFormsApp1
         private Label label9;
         private Label label8;
         private Button button5;
-        private DataGridView dataGridView6;
         private ToolStripMenuItem добавитьУстройствоToolStripMenuItem;
         private Panel panel6;
         private Label label12;

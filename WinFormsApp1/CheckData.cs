@@ -19,28 +19,20 @@ namespace WinFormsApp1
         {
             _xDoc = _getDocument.GetXmlDocument(_settings._pathDeviceStatus, "DeviceStatus.xml");
             _xRoot = _xDoc.DocumentElement;
-            string _id = "", _comment = null, _description = "";
+            string _id = "", _commentDevice = "", _description = "";
 
             if (_xRoot != null)
             {
                 foreach (XmlElement _xElements in _xRoot.ChildNodes)
                 {
-                    foreach (XmlElement _xElement in _xElements.ChildNodes)
+                    _id = _xElements.ChildNodes.Item(0).InnerText;
+                    _description = _xElements.ChildNodes.Item(1).InnerText;
+                    _commentDevice = _xElements.ChildNodes.Item(2).InnerText;
+
+                    if (_id != "" && _description != "")
                     {
-                        if (_xElement.Name == "DeviceID")
-                            _id = _xElement.InnerText;
-
-                        if (_xElement.Name == "Comment")
-                            _comment = _xElement.InnerText;
-
-                        if (_xElement.Name == "DeviceDescription")
-                            _description = _xElement.InnerText;
-
-                        if (_id != "" && _description != "" && _comment != null)
-                        {
-                            _deviceStatus.Add(new DeviceStatus { _idDevice = _id, _comment = _comment, _deviceDescription = _description });
-                            _comment = ""; _description = ""; _id = null;
-                        }
+                        _deviceStatus.Add(new DeviceStatus { _idDevice = _id, _comment = _commentDevice, _deviceDescription = _description });
+                        _commentDevice = ""; _description = ""; _id = "";
                     }
                 }
             }

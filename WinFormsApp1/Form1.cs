@@ -38,12 +38,11 @@ namespace WinFormsApp1
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            Panels = new Panel[7] {
+            Panels = new Panel[6] {
                 this.panel1,
                 this.panel2,
                 this.panel3,
                 this.panel4,
-                this.panel5,
                 this.panel6,
                 this.panel10
             };
@@ -73,10 +72,6 @@ namespace WinFormsApp1
             label10.Text = "0";
             label11.Text = "0";
             _openPanels.SetActivePanel(this.panel4);
-        }
-        private void настройкиToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            _openPanels.SetActivePanel(this.panel5);
         }
         private void добавитьУстройствоToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -170,10 +165,11 @@ namespace WinFormsApp1
                 MessageBox.Show(ex + "");
             }
         }
-        private void button3_Click(object sender, EventArgs e)
+        private void button3_Click(object sender, EventArgs e) // Инветаризация
         {
             List<string>? _namesOfdevices = new(); // список для наиминований устройств
             string _comment = "", _description = "", _department = "";
+            _deviceStatus.Clear();
 
             ClearData(dataGridView2);
             _genColumn.GenCol(dataGridView2, 5);
@@ -195,6 +191,7 @@ namespace WinFormsApp1
                         _xAnyDoc = _xDoc.DocumentElement;
 
                         _chkData.CheckDataDeviceStaus(ref _deviceStatus);
+
                         foreach (DeviceStatus _ds in _deviceStatus)
                         {
                             if (_ds._idDevice == _name)
