@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Media;
+using MySql.Data.MySqlClient;
 
 namespace WinFormsApp1
 {
@@ -83,86 +84,113 @@ namespace WinFormsApp1
         }
         private void button1_Click_1(object sender, EventArgs e) // вывод истории
         {
-            List<XmlElement> _dataXml = new();
-            string _nameOfDevice = textBox1.Text;
-            int _numberDataShow;
+            MySqlConnection conn;
+            MySqlCommand command;
 
-            ClearData(dataGridView1);
-            _genColumn.GenCol(this.dataGridView1, 0); // создаем колонны
+            string _nameOfDevice = textBox1.Text;
+            int _numberDataShow = (textBox2.Text == "") ? 1 : Convert.ToInt32(textBox2.Text);
+
+            string query = $"SELECT * FROM {_settings._mysql.database}.{_nameOfDevice},{_settings._mysql.dataBaseusersdata} " +
+                $"where {_settings._mysql.database}.{_nameOfDevice}.userID = {_settings._mysql.dataBaseusersdata}.UserID " +
+                $"order by {_settings._mysql.database}.{_nameOfDevice}.{_nameOfDevice} " +
+                $"desc limit {_numberDataShow};";
+
+            string _strconnect = $"server={_settings._mysql.hostname};user={_settings._mysql.name};database={_settings._mysql.database};password={_settings._mysql.password};";
+            conn = new MySqlConnection(_strconnect);
 
             try
             {
-                _numberDataShow = (textBox2.Text == "") ? 1 : Convert.ToInt32(textBox2.Text);
-
-                _xDoc = _getDocument.GetXmlDocument(_deviceDefinitionName.DeviceDefinition(ref _nameOfDevice), _nameOfDevice + ".xml");
-                _xRoot = _xDoc.DocumentElement; // устаналиваем коллекцию элементов
-
-                if (_xRoot.ChildNodes.Count != 0)
-                {
-                    if (_xRoot.ChildNodes != null)
-                    {
-                        foreach (XmlElement _xElem in _xRoot.ChildNodes)
-                        {
-                            _dataXml.Add(_xElem);
-                        }
-
-                        _dataXml.Reverse();
-
-                        if (_numberDataShow <= _dataXml.Count)
-                        {
-                            for (_counter = 0; _counter < _numberDataShow; _counter++)
-                            {
-                                foreach (XmlNode _xNode in _dataXml[_counter].ChildNodes)
-                                {
-                                    switch (_xNode.Name)
-                                    {
-                                        case "userID":
-                                            _numberPerson = _xNode.InnerText;
-                                            _chkData.CheckDataOfUsers(ref _dataUsers);
-                                            foreach (User u in _dataUsers)
-                                            {
-                                                if (u._idUser == _numberPerson)
-                                                {
-                                                    _nameOfPerson = u._names;
-                                                    _departmentOfUser = u._departmentUser;
-                                                }
-                                            }
-                                            break;
-
-                                        case "sdatetimeSTR":
-                                            _sDate = _xNode.InnerText;
-                                            break;
-
-                                        case "edatetimeSTR":
-                                            _eDate = _xNode.InnerText;
-                                            break;
-                                    }
-
-                                }
-                                if (_nameOfPerson == "" || _departmentOfUser == "")
-                                {
-                                    _nameOfPerson = "Нет Данных";
-                                    _departmentOfUser = "Нет Данных";
-                                }
-
-                                dataGridView1.Rows.Add(_counter, _nameOfDevice, _numberPerson, _nameOfPerson, _departmentOfUser, _sDate, _eDate); // генерация строк
-                                _numberPerson = ""; _nameOfPerson = ""; _sDate = ""; _eDate = "";
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show("введите число поменьше");
-                        }
-                    }
-                }
-                else {
-                    MessageBox.Show("Нет данных");
-                }
+                conn.Open();
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex + "");
+                MessageBox.Show(ex.Message);
             }
+            finally
+            {
+                ClearData(dataGridView1);
+                _genColumn.GenCol(this.dataGridView1, 0); // создаем колонны
+
+                command = new MySqlCommand(query, conn);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    dataGridView1.Rows.Add(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString()); // генерация строк
+                }
+
+                reader.Close();
+                conn.Close();
+            }
+
+
+
+            //_xDoc = _getDocument.GetXmlDocument(_deviceDefinitionName.DeviceDefinition(ref _nameOfDevice), _nameOfDevice + ".xml");
+            //_xRoot = _xDoc.DocumentElement; // устаналиваем коллекцию элементов
+
+            //if (_xRoot.ChildNodes.Count != 0)
+            //{
+            //    if (_xRoot.ChildNodes != null)
+            //    {
+            //        foreach (XmlElement _xElem in _xRoot.ChildNodes)
+            //        {
+            //            _dataXml.Add(_xElem);
+            //        }
+
+            //        _dataXml.Reverse();
+
+            //        if (_numberDataShow <= _dataXml.Count)
+            //        {
+            //            for (_counter = 0; _counter < _numberDataShow; _counter++)
+            //            {
+            //                foreach (XmlNode _xNode in _dataXml[_counter].ChildNodes)
+            //                {
+            //                    switch (_xNode.Name)
+            //                    {
+            //                        case "userID":
+            //                            _numberPerson = _xNode.InnerText;
+            //                            _chkData.CheckDataOfUsers(ref _dataUsers);
+            //                            foreach (User u in _dataUsers)
+            //                            {
+            //                                if (u._idUser == _numberPerson)
+            //                                {
+            //                                    _nameOfPerson = u._names;
+            //                                    _departmentOfUser = u._departmentUser;
+            //                                }
+            //                            }
+            //                            break;
+
+            //                        case "sdatetimeSTR":
+            //                            _sDate = _xNode.InnerText;
+            //                            break;
+
+            //                        case "edatetimeSTR":
+            //                            _eDate = _xNode.InnerText;
+            //                            break;
+            //                    }
+
+            //                }
+            //                if (_nameOfPerson == "" || _departmentOfUser == "")
+            //                {
+            //                    _nameOfPerson = "Нет Данных";
+            //                    _departmentOfUser = "Нет Данных";
+            //                }
+
+            //                dataGridView1.Rows.Add(_counter, _nameOfDevice, _numberPerson, _nameOfPerson, _departmentOfUser, _sDate, _eDate); // генерация строк
+            //                _numberPerson = ""; _nameOfPerson = ""; _sDate = ""; _eDate = "";
+            //            }
+            //        }
+            //        else
+            //        {
+            //            MessageBox.Show("введите число поменьше");
+            //        }
+            //    }
+            //}
+            //else {
+            //    MessageBox.Show("Нет данных");
+            //}
+
+
         }
         private void button3_Click(object sender, EventArgs e) // Инветаризация
         {
