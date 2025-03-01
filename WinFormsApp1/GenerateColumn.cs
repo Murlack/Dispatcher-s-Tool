@@ -13,11 +13,11 @@ namespace WinFormsApp1
             switch (_numberGen)
             {
                 case 0:
-                    dataGridView.Columns.Add("number", "№");
-                    dataGridView.Columns.Add("nameOfDevaces", "Номер устройства");
-                    dataGridView.Columns.Add("numberOfUser", "Номер бейджа");
-                    dataGridView.Columns.Add("nameOfUser", "Фио");
-                    dataGridView.Columns.Add("departmentOfUser", "Отдел");
+                    dataGridView.Columns.Add("number", "№");//
+                    dataGridView.Columns.Add("nameOfDevaces", "Номер устройства");//
+                    dataGridView.Columns.Add("numberOfUser", "Номер бейджа");//
+                    dataGridView.Columns.Add("UserNames", "Фио");//
+                    dataGridView.Columns.Add("UserDepartment", "Отдел");//
                     dataGridView.Columns.Add("timeStart", "Время выдачи");
                     dataGridView.Columns.Add("timeEnd", "Время приема");
                     break;

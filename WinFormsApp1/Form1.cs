@@ -89,8 +89,8 @@ namespace WinFormsApp1
 
             string _nameOfDevice = textBox1.Text;
             int _numberDataShow = (textBox2.Text == "") ? 1 : Convert.ToInt32(textBox2.Text);
-
-            string query = $"SELECT * FROM {_settings._mysql.database}.{_nameOfDevice},{_settings._mysql.dataBaseusersdata} " +
+            string query = $"SELECT tab136.TAB136, tab136.deviceID, tab136.userID, usersdata.UserNames, usersdata.UserDepartment, tab136.sdatetimeSTR, tab136.edatetimeSTR " +
+                $"FROM {_settings._mysql.database}.{_nameOfDevice},{_settings._mysql.dataBaseusersdata} " +
                 $"where {_settings._mysql.database}.{_nameOfDevice}.userID = {_settings._mysql.dataBaseusersdata}.UserID " +
                 $"order by {_settings._mysql.database}.{_nameOfDevice}.{_nameOfDevice} " +
                 $"desc limit {_numberDataShow};";
@@ -116,7 +116,7 @@ namespace WinFormsApp1
 
                 while (reader.Read())
                 {
-                    dataGridView1.Rows.Add(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString(), reader[7].ToString()); // генерация строк
+                    dataGridView1.Rows.Add(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString()); // генерация строк
                 }
 
                 reader.Close();
