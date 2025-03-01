@@ -127,7 +127,6 @@ namespace WinFormsApp1
                                                     _departmentOfUser = u._departmentUser;
                                                 }
                                             }
-
                                             break;
 
                                         case "sdatetimeSTR":
