@@ -81,7 +81,7 @@ namespace WinFormsApp1
         {
             _openPanels.SetActivePanel(this.panel10);
         }
-        private void button1_Click_1(object sender, EventArgs e)
+        private void button1_Click_1(object sender, EventArgs e) // вывод истории
         {
             List<XmlElement> _dataXml = new();
             string _nameOfDevice = textBox1.Text;
