@@ -82,6 +82,8 @@ namespace WinFormsApp1
                 if (_xNode.Name == "dataBaseusersdata")
                     _mysql.dataBaseusersdata = _xNode.InnerText;
             }
+
+            _mysql._strconnect = $"server={_mysql.hostname};user={_mysql.name};database={_mysql.database};password={_mysql.password};";
         }
     }
 }

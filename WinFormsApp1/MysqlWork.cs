@@ -17,5 +17,6 @@ namespace WinFormsApp1
         public string dataBasefileforanalysis;
         public string dataBasedevicestatus;
         public string dataBaseusersdata;
+        public string _strconnect;
     }
 }
