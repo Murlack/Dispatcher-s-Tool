@@ -1,6 +1,8 @@
 using System.Xml;
 using System.Media;
 using MySql.Data.MySqlClient;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+using System.Xml.Linq;
 
 namespace WinFormsApp1
 {
@@ -122,87 +124,163 @@ namespace WinFormsApp1
                 conn.Close();
             }
         }
+        private List<string> Device()
+        {
+            MySqlConnection connection;
+            MySqlCommand command;
+            string queryfileforanalysis = $"select NameOfDevice from fileforanalysis";
+            List<string> dev = new List<string>();
+            connection = new MySqlConnection(_settings._mysql._strconnect);
+
+            try
+            {
+                connection.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                
+                command = new MySqlCommand(queryfileforanalysis, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    dev.Add(reader[0].ToString());
+                }
+
+                reader.Close();
+                connection.Close();
+            }
+
+            return dev;
+        }
         private void button3_Click(object sender, EventArgs e) // »нветаризаци€
         {
-            List<string>? _namesOfdevices = new(); // список дл€ наиминований устройств
-            string _comment = "", _description = "", _department = "";
-            _deviceStatus.Clear();
-
             ClearData(dataGridView2);
             _genColumn.GenCol(dataGridView2, 5);
 
-            _namesOfdevices = AnalysisFileSorting(_namesOfdevices);
+            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+            MySqlCommand command;
+            MySqlDataReader reader;
 
-            _counter = 0;
-            try
+            List<string> dev = Device();
+
+            foreach (string str in dev)
             {
-                foreach (string name in _namesOfdevices) // определение типа устройства и последующий вывод последней записи истории данного устройства
+                string query = $"select {str}.{str}, {str}.deviceID, usersdata.UserID, usersdata.UserNames, " +
+                    $"usersdata.UserDepartment, {str}.sdatetimeSTR, {str}.edatetimeSTR, devicestatus.DeviceDescription, devicestatus.comment " +
+                    $"from usersdata,{str}, devicestatus where {str}.deviceID = devicestatus.DeviceID " +
+                    $"and {str}.userID = usersdata.UserID " +
+                    $"order by {str}.{str} desc " +
+                    $"limit 1;";
+
+                try
                 {
-                    _counter++;
-                    _name = name;
-                    _pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _name);
+                    connection.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    command = new MySqlCommand(query, connection);
+                    reader = command.ExecuteReader();
 
-                    if (_pathOfDevace != null)
+                    while (reader.Read())
                     {
-                        _xDoc = _getDocument.GetXmlDocument(_pathOfDevace, _name + ".xml");
-                        _xAnyDoc = _xDoc.DocumentElement;
+                        dataGridView2.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7], reader[8]);
+                    }
 
-                        _chkData.CheckDataDeviceStaus(ref _deviceStatus);
 
-                        foreach (DeviceStatus _ds in _deviceStatus)
-                        {
-                            if (_ds._idDevice == _name)
-                            {
-                                _comment = _ds._comment;
-                                _description = _ds._deviceDescription;
-                            }
-                        }
-                        try
-                        {
-                            if (_xAnyDoc.LastChild != null && _xAnyDoc != null)
-                            {
-
-                                foreach (XmlElement _xElems in _xAnyDoc.LastChild)
-                                {
-                                    if (_xElems.Name == "userID")
-                                    {
-                                        _numberPerson = _xElems.InnerText;
-                                        _chkData.CheckDataOfUsers(ref _dataUsers);
-                                        foreach (User u in _dataUsers)
-                                        {
-                                            if (u._idUser == _numberPerson)
-                                            {
-                                                _nameOfPerson = u._names;
-                                                _department = u._departmentUser;
-                                            }
-                                        }
-                                    }
-
-                                    if (_xElems.Name == "sdatetimeSTR")
-                                        _sDate = _xElems.InnerText;
-
-                                    if (_xElems.Name == "edatetimeSTR")
-                                        _eDate = _xElems.InnerText;
-                                }
-                                if (_nameOfPerson == "" || _department == "")
-                                {
-                                    _nameOfPerson = "Ќет ƒанных";
-                                    _department = "Ќет ƒанных";
-                                }
-
-                                _comment = (_comment == "") ? "нет данных" : _comment;
-                                _description = (_description == "") ? "нет данных" : _description;
-
-                                dataGridView2.Rows.Add(_counter, _name, _numberPerson, _nameOfPerson, _department, _sDate, _eDate, _description, _comment);
-                                _numberPerson = ""; _nameOfPerson = ""; _sDate = ""; _eDate = ""; _description = ""; _comment = "";
-
-                            }
-                        }
-                        catch (Exception ty) { MessageBox.Show($"+{_name} ! " + _xAnyDoc.InnerXml + ty.ToString()); }
-        }
+                    reader.Close();
+                    connection.Close();
                 }
             }
-            catch (Exception er) { MessageBox.Show(_xAnyDoc.InnerXml + er.ToString()); }
+
+
+        //    List<string>? _namesOfdevices = new(); // список дл€ наиминований устройств
+        //    string _comment = "", _description = "", _department = "";
+        //    _deviceStatus.Clear();
+
+        //    ClearData(dataGridView2);
+        //    _genColumn.GenCol(dataGridView2, 5);
+
+        //    _namesOfdevices = AnalysisFileSorting(_namesOfdevices);
+
+        //    _counter = 0;
+        //    try
+        //    {
+        //        foreach (string name in _namesOfdevices) // определение типа устройства и последующий вывод последней записи истории данного устройства
+        //        {
+        //            _counter++;
+        //            _name = name;
+        //            _pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _name);
+
+        //            if (_pathOfDevace != null)
+        //            {
+        //                _xDoc = _getDocument.GetXmlDocument(_pathOfDevace, _name + ".xml");
+        //                _xAnyDoc = _xDoc.DocumentElement;
+
+        //                _chkData.CheckDataDeviceStaus(ref _deviceStatus);
+
+        //                foreach (DeviceStatus _ds in _deviceStatus)
+        //                {
+        //                    if (_ds._idDevice == _name)
+        //                    {
+        //                        _comment = _ds._comment;
+        //                        _description = _ds._deviceDescription;
+        //                    }
+        //                }
+        //                try
+        //                {
+        //                    if (_xAnyDoc.LastChild != null && _xAnyDoc != null)
+        //                    {
+
+        //                        foreach (XmlElement _xElems in _xAnyDoc.LastChild)
+        //                        {
+        //                            if (_xElems.Name == "userID")
+        //                            {
+        //                                _numberPerson = _xElems.InnerText;
+        //                                _chkData.CheckDataOfUsers(ref _dataUsers);
+        //                                foreach (User u in _dataUsers)
+        //                                {
+        //                                    if (u._idUser == _numberPerson)
+        //                                    {
+        //                                        _nameOfPerson = u._names;
+        //                                        _department = u._departmentUser;
+        //                                    }
+        //                                }
+        //                            }
+
+        //                            if (_xElems.Name == "sdatetimeSTR")
+        //                                _sDate = _xElems.InnerText;
+
+        //                            if (_xElems.Name == "edatetimeSTR")
+        //                                _eDate = _xElems.InnerText;
+        //                        }
+        //                        if (_nameOfPerson == "" || _department == "")
+        //                        {
+        //                            _nameOfPerson = "Ќет ƒанных";
+        //                            _department = "Ќет ƒанных";
+        //                        }
+
+        //                        _comment = (_comment == "") ? "нет данных" : _comment;
+        //                        _description = (_description == "") ? "нет данных" : _description;
+
+        //                        dataGridView2.Rows.Add(_counter, _name, _numberPerson, _nameOfPerson, _department, _sDate, _eDate, _description, _comment);
+        //                        _numberPerson = ""; _nameOfPerson = ""; _sDate = ""; _eDate = ""; _description = ""; _comment = "";
+
+        //                    }
+        //                }
+        //                catch (Exception ty) { MessageBox.Show($"+{_name} ! " + _xAnyDoc.InnerXml + ty.ToString()); }
+        //}
+        //        }
+        //    }
+        //    catch (Exception er) { MessageBox.Show(_xAnyDoc.InnerXml + er.ToString()); }
         }
         private void button4_Click(object sender, EventArgs e) // истори€ пользовател€
         {
@@ -272,18 +350,11 @@ namespace WinFormsApp1
         }
         private void button5_Click(object sender, EventArgs e) // статистика
         {
-            //List<string>? _namesOfdevices = new(); // список дл€ наиминований устройств
-            //List<DataDev>? _dataHistoryDevTrue = new(); // прин€тые
-            //List<DataDev>? _dataHistoryDevFalse = new(); // выданные;
-
-            
-
-            MySqlConnection connection, connection1;
-            MySqlCommand command, command1;
+            MySqlConnection connection;
+            MySqlCommand command;
             string queryfileforanalysis = $"select NameOfDevice from fileforanalysis";
 
             connection = new MySqlConnection(_settings._mysql._strconnect);
-            connection1 = new MySqlConnection(_settings._mysql._strconnect);
 
             try
             {
@@ -304,66 +375,84 @@ namespace WinFormsApp1
                 MySqlDataReader reader = command.ExecuteReader();
 
                 List<string> dev = new List<string>();
+                List<string> devClone = new List<string>();
 
                 while (reader.Read())
                 {
                     dev.Add(reader[0].ToString());
+                    devClone.Add(reader[0].ToString());
                 }
 
                 reader.Close();
                 connection.Close();
 
-                try
+                
+                int counter = 0;
+                foreach (string d in dev)
                 {
-                    connection1.Open();
+
+                    try
+                    {
+                        connection.Open();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        string queryDevq1 = $"select * from {d} where sdatetimeSTR != '' and edatetimeSTR = '' order by {d}.{d} desc limit 1;"; // выд
+                        command = new MySqlCommand(queryDevq1, connection);
+                        reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            dataGridView4.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
+                            label10.Text = $"{counter++}";
+
+                            if (reader[1] != null)
+                            {
+                                devClone.RemoveAt(devClone.IndexOf(reader[1].ToString()));
+                            }
+                        }
+
+                        
+                        reader.Close();
+                        connection.Close();
+                    }
                 }
-                catch (Exception ex)
+
+                counter = 0;
+
+                foreach (string d in devClone)
                 {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                { 
-                    string queryDev = $" ";
-                    command1 = new MySqlCommand(queryDev,connection1);
+
+                    try
+                    {
+                        connection.Open();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        string queryDevq2 = $"select * from {d} where sdatetimeSTR != '' and edatetimeSTR != '' order by {d}.{d} desc limit 1;"; // при
+                        command = new MySqlCommand(queryDevq2, connection);
+                        reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            dataGridView5.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
+                            label11.Text = $"{counter++}";
+                        }
+
+                        reader.Close();
+                        connection.Close();
+                    }
                 }
             }
-
-
-                //_namesOfdevices = AnalysisFileSorting(_namesOfdevices);
-
-                //foreach (string name in _namesOfdevices) // определение типа устройства и последующий вывод последней записи истории данного устройства
-                //{
-                //    _counter++;
-                //    _name = name;
-                //    _pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _name);
-
-                //    if (_pathOfDevace != null)
-                //    {
-                //        _xDoc = _getDocument.GetXmlDocument(_pathOfDevace, _name + ".xml");
-                //        _xAnyDoc = _xDoc.DocumentElement;
-
-                //        if (_xAnyDoc.LastChild != null)
-                //        {
-                //            int _counter = 0;
-                //            foreach (XmlElement _xElems in _xAnyDoc.LastChild)
-                //            {
-                //                if (_xElems.Name == "sdatetimeSTR" && _xElems.InnerText != "")
-                //                    ++_counter;
-
-                //                if (_xElems.Name == "edatetimeSTR" && _xElems.InnerText == "" && _counter == 1)
-                //                    _dataHistoryDevFalse.Add(new() { _element = _xAnyDoc.LastChild, _nameDev = _name });
-
-                //                if (_xElems.Name == "edatetimeSTR" && _xElems.InnerText != "")
-                //                    _dataHistoryDevTrue.Add(new() { _element = _xAnyDoc.LastChild, _nameDev = _name });
-                //            }
-
-                //        }
-                //    }
-                //}
-
-                //RenderingDataGread(_dataHistoryDevFalse, dataGridView4, 1); // выданные
-                //RenderingDataGread(_dataHistoryDevTrue, dataGridView5, 2); // прин€тые
-            }
+        }
         private void textBox4_KeyUp(object sender, KeyEventArgs e)
         {
             string _mode = "";
@@ -534,32 +623,31 @@ namespace WinFormsApp1
                 label26.Text = "«аполните пол€";
             }
         }
-        private void button10_Click(object sender, EventArgs e)
+        private void button10_Click(object sender, EventArgs e) // посмотреть пользователей
         {
             ClearData(this.dataGridView7);
-
-            string _idUser = "", _names = "", _department = "";
-            int i = 0;
-
-            _xDoc = _getDocument.GetXmlDocument(_settings._pathUsersData, "UsersData.xml");
-            _xRoot = _xDoc.DocumentElement;
             _genColumn.GenCol(this.dataGridView7, 3);
+            string query = $"select * from {_settings._mysql.dataBaseusersdata};";
+            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+            MySqlCommand command = new MySqlCommand(query, connection);
+            
 
-            foreach (XmlElement _xElems in _xRoot.ChildNodes)
+            try
             {
-                foreach (XmlNode _xNode in _xElems.ChildNodes)
+                connection.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }   
+            finally
+            {
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
                 {
-                    if (_xNode.Name == "UserID")
-                        _idUser = _xNode.InnerText;
-
-                    if (_xNode.Name == "UserNames")
-                        _names = _xNode.InnerText;
-
-                    if (_xNode.Name == "UserDepartment")
-                        _department = _xNode.InnerText;
+                    dataGridView7.Rows.Add(reader[0], reader[1], reader[2], reader[3]);
                 }
-
-                this.dataGridView7.Rows.Add(++i, _idUser, _names, _department);
             }
         }
         private void button11_Click(object sender, EventArgs e)
