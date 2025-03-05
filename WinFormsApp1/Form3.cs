@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WinFormsApp1
 {
@@ -80,24 +82,37 @@ namespace WinFormsApp1
             label3.Text = "Удалено";
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) // Данные из файла анализа 
         {
             UpdateDataTeble();
         }
 
         private void UpdateDataTeble()
         {
-            dataGridView1.Rows.Clear();
-            dataGridView1.Columns.Clear();
-            InitializationPathVar(_settings._pathFileAnalysis);
-            _xDocument = GetDocument(_pathDocument, _settings._NameFileAnalyser + ".xml");
-            List<Data> datas = DateAnalys(_xDocument);
+            string query = $"select * from fileforanalysis";
+            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
-            dataGridView1.Columns.Add("", "Устройства");
-
-            foreach (Data data in datas)
+            try
             {
-                dataGridView1.Rows.Add(data._nameOfDev);
+                connection.Open();
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("", "id");
+                dataGridView1.Columns.Add("", "Устройства");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    dataGridView1.Rows.Add(reader[0], reader[1]);
+                }
             }
         }
 

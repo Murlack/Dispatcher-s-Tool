@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,6 +9,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Xml.Linq;
 
 namespace WinFormsApp1
 {
@@ -59,34 +62,57 @@ namespace WinFormsApp1
                 MessageBox.Show("Заполните поля для ввода");
             }
         }
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)// просмотр данных о состоянии
         {
-            _xDocument = _getDocument.GetXmlDocument(_settings._pathDeviceStatus, "DeviceStatus.xml");
-            _xRoot = _xDocument.DocumentElement;
+            string query = $"select * from devicestatus";
+            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
-            if (_xRoot != null)
+            try
             {
+                connection.Open();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                MySqlCommand command = new MySqlCommand(query,connection);
+                MySqlDataReader reader = command.ExecuteReader();
                 dataGridView1.Columns.Clear();
                 _generateColumn.GenCol(this.dataGridView1, 4);
 
-                int number = 0;
-                string _numberDevice = "", _deviceDescription = "", _comment = "";
-                foreach (XmlElement _xElements in _xRoot.ChildNodes)
+                while (reader.Read())
                 {
-                    foreach (XmlElement _xElement in _xElements.ChildNodes)
-                    {
-                        if (_xElement.Name == "DeviceID")
-                            _numberDevice = _xElement.InnerText;
-
-                        if (_xElement.Name == "DeviceDescription")
-                            _deviceDescription = _xElement.InnerText;
-
-                        if (_xElement.Name == "Comment")
-                            _comment = _xElement.InnerText;
-                    }
-                    dataGridView1.Rows.Add(number++, _numberDevice, _deviceDescription, _comment);
+                    dataGridView1.Rows.Add(reader[0], reader[1], reader[2], reader[3]);
                 }
             }
+            //_xDocument = _getDocument.GetXmlDocument(_settings._pathDeviceStatus, "DeviceStatus.xml");
+            //_xRoot = _xDocument.DocumentElement;
+
+            //if (_xRoot != null)
+            //{
+            //    dataGridView1.Columns.Clear();
+            //    _generateColumn.GenCol(this.dataGridView1, 4);
+
+            //    int number = 0;
+            //    string _numberDevice = "", _deviceDescription = "", _comment = "";
+            //    foreach (XmlElement _xElements in _xRoot.ChildNodes)
+            //    {
+            //        foreach (XmlElement _xElement in _xElements.ChildNodes)
+            //        {
+            //            if (_xElement.Name == "DeviceID")
+            //                _numberDevice = _xElement.InnerText;
+
+            //            if (_xElement.Name == "DeviceDescription")
+            //                _deviceDescription = _xElement.InnerText;
+
+            //            if (_xElement.Name == "Comment")
+            //                _comment = _xElement.InnerText;
+            //        }
+            //        dataGridView1.Rows.Add(number++, _numberDevice, _deviceDescription, _comment);
+            //    }
+            //}
 
         }
         private void button3_Click(object sender, EventArgs e)
