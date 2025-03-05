@@ -420,13 +420,14 @@ namespace WinFormsApp1
             button13.FlatStyle = FlatStyle.Popup;
             button13.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button13.ForeColor = Color.White;
-            button13.Location = new Point(249, 429);
+            button13.Location = new Point(14, 487);
             button13.Margin = new Padding(3, 4, 3, 4);
             button13.Name = "button13";
             button13.Size = new Size(311, 57);
             button13.TabIndex = 6;
             button13.Text = "Провести инвентаризацию";
             button13.UseVisualStyleBackColor = false;
+            button13.Visible = false;
             button13.Click += button13_Click;
             // 
             // button12
@@ -435,10 +436,10 @@ namespace WinFormsApp1
             button12.FlatStyle = FlatStyle.Popup;
             button12.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button12.ForeColor = Color.White;
-            button12.Location = new Point(567, 389);
+            button12.Location = new Point(290, 415);
             button12.Margin = new Padding(3, 4, 3, 4);
             button12.Name = "button12";
-            button12.Size = new Size(248, 57);
+            button12.Size = new Size(248, 84);
             button12.TabIndex = 5;
             button12.Text = "Состояние устройств";
             button12.UseVisualStyleBackColor = false;
@@ -450,10 +451,10 @@ namespace WinFormsApp1
             button8.FlatStyle = FlatStyle.Popup;
             button8.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button8.ForeColor = Color.White;
-            button8.Location = new Point(567, 463);
+            button8.Location = new Point(575, 415);
             button8.Margin = new Padding(3, 4, 3, 4);
             button8.Name = "button8";
-            button8.Size = new Size(248, 57);
+            button8.Size = new Size(248, 84);
             button8.TabIndex = 4;
             button8.Text = "Элементы файла анализа";
             button8.UseVisualStyleBackColor = false;
@@ -482,10 +483,10 @@ namespace WinFormsApp1
             button3.FlatStyle = FlatStyle.Popup;
             button3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(14, 464);
+            button3.Location = new Point(17, 415);
             button3.Margin = new Padding(3, 4, 3, 4);
             button3.Name = "button3";
-            button3.Size = new Size(186, 56);
+            button3.Size = new Size(186, 84);
             button3.TabIndex = 2;
             button3.Text = "Вывести данные";
             button3.UseVisualStyleBackColor = false;
@@ -1010,12 +1011,12 @@ namespace WinFormsApp1
             BackColor = Color.Black;
             ClientSize = new Size(1094, 593);
             Controls.Add(menuStrip1);
+            Controls.Add(panel10);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(panel6);
             Controls.Add(panel3);
             Controls.Add(panel4);
-            Controls.Add(panel10);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;

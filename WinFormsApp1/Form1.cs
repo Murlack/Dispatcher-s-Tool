@@ -103,7 +103,7 @@ namespace WinFormsApp1
             {
                 conn.Open();
             }
-            catch (Exception ex)
+            catch (MySqlException ex)
             {
                 MessageBox.Show(ex.Message);
             }
@@ -117,7 +117,7 @@ namespace WinFormsApp1
 
                 while (reader.Read())
                 {
-                    dataGridView1.Rows.Add(reader[0].ToString(), reader[1].ToString(), reader[2].ToString(), reader[3].ToString(), reader[4].ToString(), reader[5].ToString(), reader[6].ToString()); // генераци€ строк
+                    dataGridView1.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6]); // генераци€ строк
                 }
 
                 reader.Close();
@@ -200,87 +200,6 @@ namespace WinFormsApp1
                     connection.Close();
                 }
             }
-
-
-        //    List<string>? _namesOfdevices = new(); // список дл€ наиминований устройств
-        //    string _comment = "", _description = "", _department = "";
-        //    _deviceStatus.Clear();
-
-        //    ClearData(dataGridView2);
-        //    _genColumn.GenCol(dataGridView2, 5);
-
-        //    _namesOfdevices = AnalysisFileSorting(_namesOfdevices);
-
-        //    _counter = 0;
-        //    try
-        //    {
-        //        foreach (string name in _namesOfdevices) // определение типа устройства и последующий вывод последней записи истории данного устройства
-        //        {
-        //            _counter++;
-        //            _name = name;
-        //            _pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _name);
-
-        //            if (_pathOfDevace != null)
-        //            {
-        //                _xDoc = _getDocument.GetXmlDocument(_pathOfDevace, _name + ".xml");
-        //                _xAnyDoc = _xDoc.DocumentElement;
-
-        //                _chkData.CheckDataDeviceStaus(ref _deviceStatus);
-
-        //                foreach (DeviceStatus _ds in _deviceStatus)
-        //                {
-        //                    if (_ds._idDevice == _name)
-        //                    {
-        //                        _comment = _ds._comment;
-        //                        _description = _ds._deviceDescription;
-        //                    }
-        //                }
-        //                try
-        //                {
-        //                    if (_xAnyDoc.LastChild != null && _xAnyDoc != null)
-        //                    {
-
-        //                        foreach (XmlElement _xElems in _xAnyDoc.LastChild)
-        //                        {
-        //                            if (_xElems.Name == "userID")
-        //                            {
-        //                                _numberPerson = _xElems.InnerText;
-        //                                _chkData.CheckDataOfUsers(ref _dataUsers);
-        //                                foreach (User u in _dataUsers)
-        //                                {
-        //                                    if (u._idUser == _numberPerson)
-        //                                    {
-        //                                        _nameOfPerson = u._names;
-        //                                        _department = u._departmentUser;
-        //                                    }
-        //                                }
-        //                            }
-
-        //                            if (_xElems.Name == "sdatetimeSTR")
-        //                                _sDate = _xElems.InnerText;
-
-        //                            if (_xElems.Name == "edatetimeSTR")
-        //                                _eDate = _xElems.InnerText;
-        //                        }
-        //                        if (_nameOfPerson == "" || _department == "")
-        //                        {
-        //                            _nameOfPerson = "Ќет ƒанных";
-        //                            _department = "Ќет ƒанных";
-        //                        }
-
-        //                        _comment = (_comment == "") ? "нет данных" : _comment;
-        //                        _description = (_description == "") ? "нет данных" : _description;
-
-        //                        dataGridView2.Rows.Add(_counter, _name, _numberPerson, _nameOfPerson, _department, _sDate, _eDate, _description, _comment);
-        //                        _numberPerson = ""; _nameOfPerson = ""; _sDate = ""; _eDate = ""; _description = ""; _comment = "";
-
-        //                    }
-        //                }
-        //                catch (Exception ty) { MessageBox.Show($"+{_name} ! " + _xAnyDoc.InnerXml + ty.ToString()); }
-        //}
-        //        }
-        //    }
-        //    catch (Exception er) { MessageBox.Show(_xAnyDoc.InnerXml + er.ToString()); }
         }
         private void button4_Click(object sender, EventArgs e) // истори€ пользовател€
         {
@@ -586,37 +505,60 @@ namespace WinFormsApp1
         private void button9_Click(object sender, EventArgs e)
         {
             string _names, _userId, _department;
+            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
             if (this.textBox8.Text != "" && this.textBox7.Text != "" && this.textBox9.Text != "")
             {
-                _userId = this.textBox8.Text;
-                _names = this.textBox7.Text;
-                _department = this.textBox9.Text;
+                string query = $"insert into usersdata (usersdata.UserID,usersdata.UserNames,usersdata.UserDepartment) values ('{textBox8.Text}','{textBox7.Text}', '{textBox9.Text}');";
+                
+                try
+                {
+                    connection.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
 
-                _xDoc = _getDocument.GetXmlDocument(_settings._pathUsersData, "UsersData.xml");
-                _xRoot = _xDoc.DocumentElement;
+                    while (reader.Read())
+                    {
+                        MessageBox.Show(reader[0].ToString());
+                    }
 
-                XmlElement _xParent = _xDoc.CreateElement("Users");
-                XmlElement _xIdUser = _xDoc.CreateElement("UserID");
-                XmlElement _xNamesOfUser = _xDoc.CreateElement("UserNames");
-                XmlElement _xDepartmentOfUser = _xDoc.CreateElement("UserDepartment");
+                    label26.Text = "”спешно добавлен";
 
-                XmlText _xIdUserText = _xDoc.CreateTextNode(_userId);
-                XmlText _xNamesOfUserText = _xDoc.CreateTextNode(_names);
-                XmlText _xDepartmentOfUserText = _xDoc.CreateTextNode(_department);
 
-                _xIdUser.AppendChild(_xIdUserText);
-                _xNamesOfUser.AppendChild(_xNamesOfUserText);
-                _xDepartmentOfUser.AppendChild(_xDepartmentOfUserText);
+                    connection.Close();
+                }
 
-                _xParent.AppendChild(_xIdUser);
-                _xParent.AppendChild(_xNamesOfUser);
-                _xParent.AppendChild(_xDepartmentOfUser);
+                //_xDoc = _getDocument.GetXmlDocument(_settings._pathUsersData, "UsersData.xml");
+                //_xRoot = _xDoc.DocumentElement;
 
-                _xRoot.AppendChild(_xParent);
+                //XmlElement _xParent = _xDoc.CreateElement("Users");
+                //XmlElement _xIdUser = _xDoc.CreateElement("UserID");
+                //XmlElement _xNamesOfUser = _xDoc.CreateElement("UserNames");
+                //XmlElement _xDepartmentOfUser = _xDoc.CreateElement("UserDepartment");
 
-                _xDoc.Save(_settings._pathUsersData + "UsersData.xml");
-                label26.Text = "”спешно добавлен";
+                //XmlText _xIdUserText = _xDoc.CreateTextNode(_userId);
+                //XmlText _xNamesOfUserText = _xDoc.CreateTextNode(_names);
+                //XmlText _xDepartmentOfUserText = _xDoc.CreateTextNode(_department);
+
+                //_xIdUser.AppendChild(_xIdUserText);
+                //_xNamesOfUser.AppendChild(_xNamesOfUserText);
+                //_xDepartmentOfUser.AppendChild(_xDepartmentOfUserText);
+
+                //_xParent.AppendChild(_xIdUser);
+                //_xParent.AppendChild(_xNamesOfUser);
+                //_xParent.AppendChild(_xDepartmentOfUser);
+
+                //_xRoot.AppendChild(_xParent);
+
+                //_xDoc.Save(_settings._pathUsersData + "UsersData.xml");
+                
             }
             else
             {

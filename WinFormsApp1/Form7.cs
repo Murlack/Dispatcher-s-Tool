@@ -30,7 +30,7 @@ namespace WinFormsApp1
             label3.Text = _CcountElemOfDoc.ToString();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e)// провести инвент
         {
             ClearDataInTable();
 
