@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,24 +25,30 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _xDocument = _getDocument.GetXmlDocument(_settings._pathDeviceStatus, "DeviceStatus.xml");
-            _xRoot = _xDocument.DocumentElement;
+            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
-            if (_xRoot != null && textBox1.Text != "")
+            if (textBox1.Text != "")
             {
-                int i = 0;
-
-                foreach (XmlElement _xElements in _xRoot.ChildNodes)
+                try
                 {
-                    if (i == Convert.ToInt32(textBox1.Text))
-                    {
-                        _xRoot.RemoveChild(_xElements);
-                        break;
-                    }
-                    i++;
+                    connection.Open();
                 }
-
-                _xDocument.Save(_settings._pathDeviceStatus + "DeviceStatus.xml");
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    string query = $"delete from devicestatus where devicestatus.DeviceID = '{textBox1.Text}';";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        MessageBox.Show(reader[0].ToString());
+                    }
+                    reader.Close();
+                    connection.Close();
+                }
 
                 label3.Text = "Удалено";
             }

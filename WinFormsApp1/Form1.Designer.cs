@@ -1011,12 +1011,12 @@ namespace WinFormsApp1
             BackColor = Color.Black;
             ClientSize = new Size(1094, 593);
             Controls.Add(menuStrip1);
-            Controls.Add(panel10);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Controls.Add(panel6);
             Controls.Add(panel3);
             Controls.Add(panel4);
+            Controls.Add(panel10);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
