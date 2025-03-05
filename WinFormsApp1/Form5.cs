@@ -87,32 +87,6 @@ namespace WinFormsApp1
                     dataGridView1.Rows.Add(reader[0], reader[1], reader[2], reader[3]);
                 }
             }
-            //_xDocument = _getDocument.GetXmlDocument(_settings._pathDeviceStatus, "DeviceStatus.xml");
-            //_xRoot = _xDocument.DocumentElement;
-
-            //if (_xRoot != null)
-            //{
-            //    dataGridView1.Columns.Clear();
-            //    _generateColumn.GenCol(this.dataGridView1, 4);
-
-            //    int number = 0;
-            //    string _numberDevice = "", _deviceDescription = "", _comment = "";
-            //    foreach (XmlElement _xElements in _xRoot.ChildNodes)
-            //    {
-            //        foreach (XmlElement _xElement in _xElements.ChildNodes)
-            //        {
-            //            if (_xElement.Name == "DeviceID")
-            //                _numberDevice = _xElement.InnerText;
-
-            //            if (_xElement.Name == "DeviceDescription")
-            //                _deviceDescription = _xElement.InnerText;
-
-            //            if (_xElement.Name == "Comment")
-            //                _comment = _xElement.InnerText;
-            //        }
-            //        dataGridView1.Rows.Add(number++, _numberDevice, _deviceDescription, _comment);
-            //    }
-            //}
 
         }
         private void button3_Click(object sender, EventArgs e)
