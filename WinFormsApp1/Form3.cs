@@ -80,7 +80,7 @@ namespace WinFormsApp1
                 }
                 finally
                 {
-                    string query = $"delete from fileforanalysis where fileforanalysis.NameOfDevice = '{textBox1.Text}';";
+                    string query = $"delete from fileforanalysis where fileforanalysis.NameOfDevice = '{textBox1.Text}' limit 1;";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader reader = command.ExecuteReader();
 
@@ -95,22 +95,6 @@ namespace WinFormsApp1
 
                 }
             }
-
-            //_xRoot = _xDocument.DocumentElement;
-
-            //foreach (XmlElement xmlElements in _xRoot)
-            //{
-            //    foreach (XmlNode item in xmlElements)
-            //    {
-            //        if (item.InnerText == textBox1.Text)
-            //        {
-            //            _xRoot.RemoveChild(xmlElements);
-            //        }
-            //    }
-            //}
-
-            //_xDocument.Save(_pathDocument + _settings._NameFileAnalyser + ".xml");
-            //label3.Text = "Удалено";
         }
 
         private void button2_Click(object sender, EventArgs e) // Данные из файла анализа 

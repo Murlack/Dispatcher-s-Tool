@@ -3,6 +3,8 @@ using System.Media;
 using MySql.Data.MySqlClient;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using System.Xml.Linq;
+using System.Diagnostics.Metrics;
+using System.Reflection;
 
 namespace WinFormsApp1
 {
@@ -55,23 +57,22 @@ namespace WinFormsApp1
         }
         private void èñòîðèÿÓñòðîéñòâToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClearData(dataGridView1);
+            
             _openPanels.SetActivePanel(this.panel1);
         }
         private void èíâåíòàðèçàöèÿToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClearData(dataGridView2);
+            
             _openPanels.SetActivePanel(this.panel2);
         }
         private void èñòîðèÿÏîëüçîâàòåëåéToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClearData(dataGridView3);
+            
             _openPanels.SetActivePanel(this.panel3);
         }
         private void ñòàòèñòèêàToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            ClearData(dataGridView4);
-            ClearData(dataGridView5);
+            
             label10.Text = "0";
             label11.Text = "0";
             _openPanels.SetActivePanel(this.panel4);
@@ -170,12 +171,13 @@ namespace WinFormsApp1
 
             foreach (string str in dev)
             {
-                string query = $"select {str}.{str}, {str}.deviceID, usersdata.UserID, usersdata.UserNames, " +
-                    $"usersdata.UserDepartment, {str}.sdatetimeSTR, {str}.edatetimeSTR, devicestatus.DeviceDescription, devicestatus.comment " +
-                    $"from usersdata,{str}, devicestatus where {str}.deviceID = devicestatus.DeviceID " +
-                    $"and {str}.userID = usersdata.UserID " +
-                    $"order by {str}.{str} desc " +
-                    $"limit 1;";
+                string query = $"SELECT {str}.{str}, {str}.deviceID, usersdata.UserID, " +
+                    $"usersdata.UserNames, usersdata.UserDepartment, {str}.sdatetimeSTR, {str}.edatetimeSTR, " +
+                    $"devicestatus.DeviceDescription, devicestatus.comment " +
+                    $"FROM {str}" +
+                    $" LEFT JOIN devicestatus ON dt.{str}.deviceID = devicestatus.DeviceID " +
+                    $"LEFT JOIN usersdata ON {str}.userID = usersdata.UserID " +
+                    $"ORDER BY {str}.{str} DESC LIMIT 1;";
 
                 try
                 {
@@ -294,19 +296,18 @@ namespace WinFormsApp1
                 MySqlDataReader reader = command.ExecuteReader();
 
                 List<string> dev = new List<string>();
-                List<string> devClone = new List<string>();
 
                 while (reader.Read())
                 {
                     dev.Add(reader[0].ToString());
-                    devClone.Add(reader[0].ToString());
                 }
 
                 reader.Close();
                 connection.Close();
 
 
-                int counter = 0;
+                int counter1 = 0;
+                int counter2 = 0;
                 foreach (string d in dev)
                 {
 
@@ -320,56 +321,73 @@ namespace WinFormsApp1
                     }
                     finally
                     {
-                        string queryDevq1 = $"select * from {d} where sdatetimeSTR != '' and edatetimeSTR = '' order by {d}.{d} desc limit 1;"; // âûä
+                        string queryDevq1 = $"select * from {d} order by {d}.{d} desc limit 1;"; // âûä
                         command = new MySqlCommand(queryDevq1, connection);
                         reader = command.ExecuteReader();
 
                         while (reader.Read())
                         {
-                            dataGridView4.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
-                            label10.Text = $"{counter++}";
-
-                            if (reader[1] != null)
+                            if (reader[3].ToString() != "" && reader[4].ToString() == "")
                             {
-                                devClone.RemoveAt(devClone.IndexOf(reader[1].ToString()));
+                                dataGridView4.Rows.Add(reader[0], reader[1], reader[2], reader[3]);
+                                label10.Text = $"{++counter1}";
                             }
+                            else if (reader[3].ToString() != "" && reader[4].ToString() != "")
+                            {
+                                dataGridView5.Rows.Add(reader[0], reader[1], reader[2], reader[4]);
+                                label11.Text = $"{++counter2}";
+                            }
+
+                            //dataGridView4.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
+                            //label10.Text = $"{counter++}";
+
+                            //if (reader[1].ToString() != "")
+                            //{
+                            //    int index = dev.IndexOf(reader[1].ToString());
+
+                            //    if (index >=0 && devClone.Count > index)
+                            //    {
+                            //        devClone.RemoveAt(index);
+                            //    }
+                            //}
                         }
 
-
+                        
                         reader.Close();
                         connection.Close();
                     }
+
                 }
+                //MessageBox.Show($"{dev.Count}  {devClone.Count}");
+                //counter = 0;
 
-                counter = 0;
+                //foreach (string d in devClone)
+                //{
 
-                foreach (string d in devClone)
-                {
+                //    try
+                //    {
+                //        connection.Open();
+                //    }
+                //    catch (Exception ex)
+                //    {
+                //        MessageBox.Show(ex.Message);
+                //    }
+                //    finally
+                //    {
+                //        string queryDevq2 = $"select * from {d} where sdatetimeSTR != '' and edatetimeSTR != '' order by {d}.{d} desc limit 1;"; // ïðè
+                //        command = new MySqlCommand(queryDevq2, connection);
+                //        reader = command.ExecuteReader();
 
-                    try
-                    {
-                        connection.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
-                        string queryDevq2 = $"select * from {d} where sdatetimeSTR != '' and edatetimeSTR != '' order by {d}.{d} desc limit 1;"; // ïðè
-                        command = new MySqlCommand(queryDevq2, connection);
-                        reader = command.ExecuteReader();
+                //        while (reader.Read())
+                //        {
+                //            dataGridView5.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
+                //            label11.Text = $"{counter++}";
+                //        }
 
-                        while (reader.Read())
-                        {
-                            dataGridView5.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
-                            label11.Text = $"{counter++}";
-                        }
-
-                        reader.Close();
-                        connection.Close();
-                    }
-                }
+                //        reader.Close();
+                //        connection.Close();
+                //    }
+                //}
             }
         }
         private void textBox4_KeyUp(object sender, KeyEventArgs e)
