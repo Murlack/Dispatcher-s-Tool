@@ -163,7 +163,15 @@ namespace WinFormsApp1
                 }
                 finally
                 {
-                    string query = $"insert into fileforanalysis (fileforanalysis.NameOfDevice) values ('{textBox2.Text}');";
+                    string query = $"insert into fileforanalysis (fileforanalysis.NameOfDevice) values ('{textBox2.Text}'); " +
+                        $"CREATE TABLE if not exists `{textBox2.Text}` (" +
+                        $"`{textBox2.Text}` int NOT NULL AUTO_INCREMENT," +
+                        $"`deviceID` varchar(45) NOT NULL," +
+                        $"`userID` varchar(45) NOT NULL," +
+                        $" `sdatetimeSTR` varchar(45) DEFAULT NULL," +
+                        $"  `edatetimeSTR` varchar(45) DEFAULT NULL," +
+                        $"  PRIMARY KEY (`{textBox2.Text}`)" +
+                        $" ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader reader = command.ExecuteReader();
 

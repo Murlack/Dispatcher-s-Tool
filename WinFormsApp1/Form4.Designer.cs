@@ -35,12 +35,14 @@
             button1 = new Button();
             textBox1 = new TextBox();
             label1 = new Label();
+            label4 = new Label();
             panel1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
             panel1.BackColor = Color.FromArgb(192, 0, 0);
+            panel1.Controls.Add(label4);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(button1);
@@ -49,7 +51,7 @@
             panel1.Location = new Point(12, 13);
             panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(290, 309);
+            panel1.Size = new Size(341, 251);
             panel1.TabIndex = 0;
             // 
             // label3
@@ -57,7 +59,7 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(95, 188);
+            label3.Location = new Point(117, 188);
             label3.Name = "label3";
             label3.Size = new Size(21, 28);
             label3.TabIndex = 5;
@@ -109,11 +111,22 @@
             label1.TabIndex = 0;
             label1.Text = "Удалить пользователя";
             // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label4.ForeColor = Color.White;
+            label4.Location = new Point(224, 71);
+            label4.Name = "label4";
+            label4.Size = new Size(78, 28);
+            label4.TabIndex = 6;
+            label4.Text = "Бейдж";
+            // 
             // Form4
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(312, 333);
+            ClientSize = new Size(365, 269);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
             Margin = new Padding(3, 4, 3, 4);
@@ -132,5 +145,6 @@
         private TextBox textBox1;
         private Label label3;
         private Label label2;
+        private Label label4;
     }
 }

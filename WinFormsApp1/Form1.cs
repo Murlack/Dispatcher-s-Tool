@@ -51,7 +51,7 @@ namespace WinFormsApp1
             };
 
             _openPanels = new(Panels);
-            _openPanels.SetActivePanel(this.panel1);
+            _openPanels.SetActivePanel(this.panel6);
         }
         private void èñòîðèÿÓñòðîéñòâToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -96,7 +96,7 @@ namespace WinFormsApp1
                 $"where {_settings._mysql.database}.{_nameOfDevice}.userID = {_settings._mysql.dataBaseusersdata}.UserID " +
                 $"order by {_settings._mysql.database}.{_nameOfDevice}.{_nameOfDevice} " +
                 $"desc limit {_numberDataShow};";
-            
+
             conn = new MySqlConnection(_settings._mysql._strconnect);
 
             try
@@ -142,7 +142,7 @@ namespace WinFormsApp1
             }
             finally
             {
-                
+
                 command = new MySqlCommand(queryfileforanalysis, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -223,7 +223,7 @@ namespace WinFormsApp1
                 _numberPerson = (textBox3.Text != "") ? textBox3.Text : "0001"; // áýéäæ
                 ClearData(dataGridView3);
                 _genColumn.GenCol(dataGridView3, -1);
-                command = new MySqlCommand(queryfileforanalysis,connection);
+                command = new MySqlCommand(queryfileforanalysis, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 List<string> dev = new List<string>();
@@ -232,7 +232,7 @@ namespace WinFormsApp1
                 {
                     dev.Add(reader[0].ToString());
                 }
-                
+
                 reader.Close();
                 connection.Close();
 
@@ -305,7 +305,7 @@ namespace WinFormsApp1
                 reader.Close();
                 connection.Close();
 
-                
+
                 int counter = 0;
                 foreach (string d in dev)
                 {
@@ -335,7 +335,7 @@ namespace WinFormsApp1
                             }
                         }
 
-                        
+
                         reader.Close();
                         connection.Close();
                     }
@@ -432,13 +432,61 @@ namespace WinFormsApp1
 
                 if (_modeWork == "M001" && _numberPerson != "" && _deviceNumber != "")
                 {
-                    AddDataInDocument(_xDoc, _modeWork, _deviceNumber, _numberPerson, _pathOfDevace + $"\\{_deviceNumber}.xml");
+                    MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+                    try
+                    {
+                        connection.Open();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        string query = $"insert into {_deviceNumber} (deviceID,userID,sdatetimeSTR,edatetimeSTR) values ('{_deviceNumber}','{_numberPerson}','{DateTime.Now}','');";
+
+                        MySqlCommand command = new MySqlCommand(query, connection);
+                        MySqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            MessageBox.Show(reader[0].ToString());
+                        }
+
+                        reader.Close();
+                        connection.Close();
+
+                    }
                     _numberPerson = "";
                     _deviceNumber = "";
                 }
                 else if (_modeWork == "M002" && _deviceNumber != "")
                 {
-                    AddDataInDocument(_xDoc, _modeWork, _deviceNumber, _numberPerson, _pathOfDevace + $"\\{_deviceNumber}.xml");
+                    MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+                    try
+                    {
+                        connection.Open();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        string query = $"UPDATE {_deviceNumber} SET edatetimeSTR = '{DateTime.Now}' WHERE edatetimeSTR = '';";
+
+                        MySqlCommand command = new MySqlCommand(query, connection);
+                        MySqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            MessageBox.Show(reader[0].ToString());
+                        }
+
+                        reader.Close();
+                        connection.Close();
+
+                    }
                     _deviceNumber = "";
                 }
             }
@@ -459,11 +507,31 @@ namespace WinFormsApp1
                 {
                     _personNumber = textBox5.Text;
                     _deviceNumber = textBox6.Text;
+                    MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+                    try
+                    {
+                        connection.Open();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        string query = $"insert into {_deviceNumber} (deviceID,userID,sdatetimeSTR,edatetimeSTR) values ('{_deviceNumber}','{_personNumber}','{DateTime.Now}','');";
 
-                    _pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _deviceNumber);
-                    _xDoc = _getDocument.GetXmlDocument(_pathOfDevace, $"\\{_deviceNumber}.xml");
+                        MySqlCommand command = new MySqlCommand(query, connection);
+                        MySqlDataReader reader = command.ExecuteReader();
 
-                    AddDataInDocument(_xDoc, _modeWork, _deviceNumber, _personNumber, _pathOfDevace + $"\\{_deviceNumber}.xml");
+                        while (reader.Read())
+                        {
+                            MessageBox.Show(reader[0].ToString());
+                        }
+
+                        reader.Close();
+                        connection.Close();
+
+                    }
 
                     label28.Text = $"{_deviceNumber} âûäàí";
                 }
@@ -480,10 +548,31 @@ namespace WinFormsApp1
                 {
                     _deviceNumber = textBox6.Text;
 
-                    _pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _deviceNumber);
-                    _xDoc = _getDocument.GetXmlDocument(_pathOfDevace, $"\\{_deviceNumber}.xml");
+                    MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+                    try
+                    {
+                        connection.Open();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                    finally
+                    {
+                        string query = $"UPDATE {_deviceNumber} SET edatetimeSTR = '{DateTime.Now}' WHERE edatetimeSTR = '';";
 
-                    AddDataInDocument(_xDoc, _modeWork, _deviceNumber, "", _pathOfDevace + $"\\{_deviceNumber}.xml");
+                        MySqlCommand command = new MySqlCommand(query, connection);
+                        MySqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            MessageBox.Show(reader[0].ToString());
+                        }
+
+                        reader.Close();
+                        connection.Close();
+
+                    }
 
                     label28.Text = $"{_deviceNumber} ïðèíÿò";
                 }
@@ -510,7 +599,7 @@ namespace WinFormsApp1
             if (this.textBox8.Text != "" && this.textBox7.Text != "" && this.textBox9.Text != "")
             {
                 string query = $"insert into usersdata (usersdata.UserID,usersdata.UserNames,usersdata.UserDepartment) values ('{textBox8.Text}','{textBox7.Text}', '{textBox9.Text}');";
-                
+
                 try
                 {
                     connection.Open();
@@ -534,31 +623,6 @@ namespace WinFormsApp1
 
                     connection.Close();
                 }
-
-                //_xDoc = _getDocument.GetXmlDocument(_settings._pathUsersData, "UsersData.xml");
-                //_xRoot = _xDoc.DocumentElement;
-
-                //XmlElement _xParent = _xDoc.CreateElement("Users");
-                //XmlElement _xIdUser = _xDoc.CreateElement("UserID");
-                //XmlElement _xNamesOfUser = _xDoc.CreateElement("UserNames");
-                //XmlElement _xDepartmentOfUser = _xDoc.CreateElement("UserDepartment");
-
-                //XmlText _xIdUserText = _xDoc.CreateTextNode(_userId);
-                //XmlText _xNamesOfUserText = _xDoc.CreateTextNode(_names);
-                //XmlText _xDepartmentOfUserText = _xDoc.CreateTextNode(_department);
-
-                //_xIdUser.AppendChild(_xIdUserText);
-                //_xNamesOfUser.AppendChild(_xNamesOfUserText);
-                //_xDepartmentOfUser.AppendChild(_xDepartmentOfUserText);
-
-                //_xParent.AppendChild(_xIdUser);
-                //_xParent.AppendChild(_xNamesOfUser);
-                //_xParent.AppendChild(_xDepartmentOfUser);
-
-                //_xRoot.AppendChild(_xParent);
-
-                //_xDoc.Save(_settings._pathUsersData + "UsersData.xml");
-                
             }
             else
             {
@@ -572,7 +636,7 @@ namespace WinFormsApp1
             string query = $"select * from {_settings._mysql.dataBaseusersdata};";
             MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
             MySqlCommand command = new MySqlCommand(query, connection);
-            
+
 
             try
             {
@@ -581,7 +645,7 @@ namespace WinFormsApp1
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-            }   
+            }
             finally
             {
                 MySqlDataReader reader = command.ExecuteReader();
@@ -781,6 +845,5 @@ namespace WinFormsApp1
         {
             new Form7().Show();
         }
-
     }
 }
