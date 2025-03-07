@@ -173,59 +173,6 @@ namespace WinFormsApp1
             {
                 label6.Text = "Не добавлено";
             }
-            //XmlDocument _xDoc = null;
-            //FileInfo _fileInfo = null;
-            //string _pathOfAnalysis = _settings._pathFileAnalysis;
-            //string _pathOfDevice = "";
-            //string _content =
-            //    "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
-            //    "<operations>\r\n  " +
-            //    "<operation>\r\n    " +
-            //    "<deviceID>\r\n    </deviceID>\r\n    " +
-            //    "<userID>0000</userID>\r\n    " +
-            //    "<sdatetimeSTR>26.10.2001 16:52:10</sdatetimeSTR>\r\n   " +
-            //    " <edatetimeSTR>26.10.2001 16:52:11</edatetimeSTR>\r\n  " +
-            //    "</operation>\r\n " +
-            //    "</operations>  ";
-
-            //_xDoc = _getDoc.GetXmlDocument(_settings._pathFileAnalysis, "\\FileForAnalysis.xml"); // загрузка файла с данными для анализа инвентаризации
-
-            //_device = textBox2.Text;
-
-            //if (_device != "")
-            //{
-            //    _pathOfDevice = _deviceDefinitionName.DeviceDefinition(ref _device);
-            //    _fileInfo = new FileInfo(_pathOfDevice + _device + ".xml");
-
-            //    if (!_fileInfo.Exists)
-            //    {
-            //        File.AppendAllTextAsync(_fileInfo.FullName, _content);
-            //    }
-
-            //    if (_xDoc.DocumentElement != null)
-            //    {
-            //        _xRoot = _xDoc.DocumentElement;
-
-            //        if (_xRoot != null)
-            //        {
-            //            _xmlDevice = _xDoc.CreateElement("Device");
-            //            _xmlNameOfDevice = _xDoc.CreateElement("NameOfDevice");
-            //            _xmlTextName = _xDoc.CreateTextNode(_device);
-
-            //            _xmlNameOfDevice.AppendChild(_xmlTextName);
-            //            _xmlDevice.AppendChild(_xmlNameOfDevice);
-            //            _xRoot.AppendChild(_xmlDevice);
-
-            //            _xDoc.Save(_settings._pathFileAnalysis + "\\FileForAnalysis.xml");
-
-            //            label6.Text = "Добавлено";
-            //        }
-            //    }
-            //    else
-            //    {
-            //        label6.Text = "Не добавлено";
-            //    }
-            //}
         }
     }
     public struct Data

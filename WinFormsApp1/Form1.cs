@@ -92,11 +92,16 @@ namespace WinFormsApp1
 
             string _nameOfDevice = textBox1.Text;
             int _numberDataShow = (textBox2.Text == "") ? 1 : Convert.ToInt32(textBox2.Text);
-            string query = $"SELECT {_nameOfDevice}.{_nameOfDevice}, {_nameOfDevice}.deviceID, {_nameOfDevice}.userID, {_settings._mysql.dataBaseusersdata}.UserNames, {_settings._mysql.dataBaseusersdata}.UserDepartment, {_nameOfDevice}.sdatetimeSTR, {_nameOfDevice}.edatetimeSTR " +
-                $"FROM {_settings._mysql.database}.{_nameOfDevice},{_settings._mysql.dataBaseusersdata} " +
-                $"where {_settings._mysql.database}.{_nameOfDevice}.userID = {_settings._mysql.dataBaseusersdata}.UserID " +
-                $"order by {_settings._mysql.database}.{_nameOfDevice}.{_nameOfDevice} " +
-                $"desc limit {_numberDataShow};";
+            //string query = $"SELECT {_nameOfDevice}.{_nameOfDevice}, {_nameOfDevice}.deviceID, {_nameOfDevice}.userID, {_settings._mysql.dataBaseusersdata}.UserNames, {_settings._mysql.dataBaseusersdata}.UserDepartment, {_nameOfDevice}.sdatetimeSTR, {_nameOfDevice}.edatetimeSTR " +
+            //    $"FROM {_settings._mysql.database}.{_nameOfDevice},{_settings._mysql.dataBaseusersdata} " +
+            //    $"where {_settings._mysql.database}.{_nameOfDevice}.userID = {_settings._mysql.dataBaseusersdata}.UserID " +
+            //    $"order by {_settings._mysql.database}.{_nameOfDevice}.{_nameOfDevice} " +
+            //    $"desc limit {_numberDataShow};";
+            string query = $"select dt.{_nameOfDevice}.{_nameOfDevice}, dt.{_nameOfDevice}.deviceID,dt.{_nameOfDevice}.userID,dt.usersdata.UserNames,dt.usersdata.UserDepartment,dt.{_nameOfDevice}.sdatetimeSTR,dt.{_nameOfDevice}.edatetimeSTR" +
+                $" from {_nameOfDevice} " +
+                $"left join dt.usersdata on dt.usersdata.UserID = {_nameOfDevice}.userID " +
+                $"order by dt.{_nameOfDevice}.{_nameOfDevice} desc " +
+                $"limit {_numberDataShow};";
 
             conn = new MySqlConnection(_settings._mysql._strconnect);
 
@@ -337,19 +342,6 @@ namespace WinFormsApp1
                                 dataGridView5.Rows.Add(reader[0], reader[1], reader[2], reader[4]);
                                 label11.Text = $"{++counter2}";
                             }
-
-                            //dataGridView4.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
-                            //label10.Text = $"{counter++}";
-
-                            //if (reader[1].ToString() != "")
-                            //{
-                            //    int index = dev.IndexOf(reader[1].ToString());
-
-                            //    if (index >=0 && devClone.Count > index)
-                            //    {
-                            //        devClone.RemoveAt(index);
-                            //    }
-                            //}
                         }
 
                         
@@ -358,36 +350,6 @@ namespace WinFormsApp1
                     }
 
                 }
-                //MessageBox.Show($"{dev.Count}  {devClone.Count}");
-                //counter = 0;
-
-                //foreach (string d in devClone)
-                //{
-
-                //    try
-                //    {
-                //        connection.Open();
-                //    }
-                //    catch (Exception ex)
-                //    {
-                //        MessageBox.Show(ex.Message);
-                //    }
-                //    finally
-                //    {
-                //        string queryDevq2 = $"select * from {d} where sdatetimeSTR != '' and edatetimeSTR != '' order by {d}.{d} desc limit 1;"; // при
-                //        command = new MySqlCommand(queryDevq2, connection);
-                //        reader = command.ExecuteReader();
-
-                //        while (reader.Read())
-                //        {
-                //            dataGridView5.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4]);
-                //            label11.Text = $"{counter++}";
-                //        }
-
-                //        reader.Close();
-                //        connection.Close();
-                //    }
-                //}
             }
         }
         private void textBox4_KeyUp(object sender, KeyEventArgs e)
@@ -653,7 +615,7 @@ namespace WinFormsApp1
             _genColumn.GenCol(this.dataGridView7, 3);
             string query = $"select * from {_settings._mysql.dataBaseusersdata};";
             MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
-            MySqlCommand command = new MySqlCommand(query, connection);
+            
 
 
             try
@@ -666,6 +628,7 @@ namespace WinFormsApp1
             }
             finally
             {
+                MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
