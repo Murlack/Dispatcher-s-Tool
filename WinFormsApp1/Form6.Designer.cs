@@ -46,9 +46,10 @@
             panel1.Controls.Add(label1);
             panel1.Controls.Add(textBox1);
             panel1.Controls.Add(button1);
-            panel1.Location = new Point(12, 12);
+            panel1.Location = new Point(14, 16);
+            panel1.Margin = new Padding(3, 4, 3, 4);
             panel1.Name = "panel1";
-            panel1.Size = new Size(244, 239);
+            panel1.Size = new Size(279, 319);
             panel1.TabIndex = 0;
             // 
             // label3
@@ -56,9 +57,9 @@
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label3.ForeColor = Color.White;
-            label3.Location = new Point(88, 187);
+            label3.Location = new Point(101, 249);
             label3.Name = "label3";
-            label3.Size = new Size(17, 21);
+            label3.Size = new Size(21, 28);
             label3.TabIndex = 4;
             label3.Text = "*";
             // 
@@ -67,9 +68,9 @@
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label2.ForeColor = Color.White;
-            label2.Location = new Point(5, 187);
+            label2.Location = new Point(6, 249);
             label2.Name = "label2";
-            label2.Size = new Size(64, 21);
+            label2.Size = new Size(79, 28);
             label2.TabIndex = 3;
             label2.Text = "Статус:";
             // 
@@ -78,18 +79,19 @@
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.White;
-            label1.Location = new Point(0, 15);
+            label1.Location = new Point(0, 20);
             label1.Name = "label1";
-            label1.Size = new Size(233, 21);
+            label1.Size = new Size(291, 28);
             label1.TabIndex = 2;
             label1.Text = "Удалить данные из таблицы";
             // 
             // textBox1
             // 
-            textBox1.Location = new Point(5, 69);
+            textBox1.Location = new Point(6, 92);
+            textBox1.Margin = new Padding(3, 4, 3, 4);
             textBox1.Name = "textBox1";
-            textBox1.PlaceholderText = "Порядковый номер из таблицы";
-            textBox1.Size = new Size(201, 23);
+            textBox1.PlaceholderText = "Название устройства";
+            textBox1.Size = new Size(229, 27);
             textBox1.TabIndex = 1;
             // 
             // button1
@@ -98,9 +100,10 @@
             button1.FlatStyle = FlatStyle.Popup;
             button1.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.White;
-            button1.Location = new Point(5, 122);
+            button1.Location = new Point(6, 163);
+            button1.Margin = new Padding(3, 4, 3, 4);
             button1.Name = "button1";
-            button1.Size = new Size(124, 35);
+            button1.Size = new Size(142, 47);
             button1.TabIndex = 0;
             button1.Text = "Удалить";
             button1.UseVisualStyleBackColor = false;
@@ -108,12 +111,13 @@
             // 
             // Form6
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.Black;
-            ClientSize = new Size(268, 297);
+            ClientSize = new Size(306, 396);
             Controls.Add(panel1);
             Icon = (Icon)resources.GetObject("$this.Icon");
+            Margin = new Padding(3, 4, 3, 4);
             Name = "Form6";
             Text = "Despatcher Tool";
             panel1.ResumeLayout(false);

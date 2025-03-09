@@ -71,9 +71,9 @@ namespace WinFormsApp1
             panel9 = new Panel();
             label22 = new Label();
             label21 = new Label();
-            label12 = new Label();
             panel7 = new Panel();
             button6 = new Button();
+            label12 = new Label();
             label16 = new Label();
             label15 = new Label();
             textBox4 = new TextBox();
@@ -420,13 +420,14 @@ namespace WinFormsApp1
             button13.FlatStyle = FlatStyle.Popup;
             button13.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button13.ForeColor = Color.White;
-            button13.Location = new Point(249, 429);
+            button13.Location = new Point(14, 487);
             button13.Margin = new Padding(3, 4, 3, 4);
             button13.Name = "button13";
             button13.Size = new Size(311, 57);
             button13.TabIndex = 6;
             button13.Text = "Провести инвентаризацию";
             button13.UseVisualStyleBackColor = false;
+            button13.Visible = false;
             button13.Click += button13_Click;
             // 
             // button12
@@ -435,10 +436,10 @@ namespace WinFormsApp1
             button12.FlatStyle = FlatStyle.Popup;
             button12.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button12.ForeColor = Color.White;
-            button12.Location = new Point(567, 389);
+            button12.Location = new Point(290, 415);
             button12.Margin = new Padding(3, 4, 3, 4);
             button12.Name = "button12";
-            button12.Size = new Size(248, 57);
+            button12.Size = new Size(248, 84);
             button12.TabIndex = 5;
             button12.Text = "Состояние устройств";
             button12.UseVisualStyleBackColor = false;
@@ -450,10 +451,10 @@ namespace WinFormsApp1
             button8.FlatStyle = FlatStyle.Popup;
             button8.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button8.ForeColor = Color.White;
-            button8.Location = new Point(567, 463);
+            button8.Location = new Point(575, 415);
             button8.Margin = new Padding(3, 4, 3, 4);
             button8.Name = "button8";
-            button8.Size = new Size(248, 57);
+            button8.Size = new Size(248, 84);
             button8.TabIndex = 4;
             button8.Text = "Элементы файла анализа";
             button8.UseVisualStyleBackColor = false;
@@ -482,10 +483,10 @@ namespace WinFormsApp1
             button3.FlatStyle = FlatStyle.Popup;
             button3.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             button3.ForeColor = Color.White;
-            button3.Location = new Point(14, 464);
+            button3.Location = new Point(17, 415);
             button3.Margin = new Padding(3, 4, 3, 4);
             button3.Name = "button3";
-            button3.Size = new Size(186, 56);
+            button3.Size = new Size(186, 84);
             button3.TabIndex = 2;
             button3.Text = "Вывести данные";
             button3.UseVisualStyleBackColor = false;
@@ -582,8 +583,8 @@ namespace WinFormsApp1
             panel9.BackColor = Color.Black;
             panel9.Controls.Add(label22);
             panel9.Controls.Add(label21);
-            panel9.Controls.Add(label12);
             panel9.Controls.Add(panel7);
+            panel9.Controls.Add(label12);
             panel9.Controls.Add(label16);
             panel9.Controls.Add(label15);
             panel9.Controls.Add(textBox4);
@@ -617,21 +618,10 @@ namespace WinFormsApp1
             label21.TabIndex = 8;
             label21.Text = "Режим:";
             // 
-            // label12
-            // 
-            label12.AutoSize = true;
-            label12.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            label12.ForeColor = Color.White;
-            label12.Location = new Point(23, 23);
-            label12.Name = "label12";
-            label12.Size = new Size(285, 32);
-            label12.TabIndex = 0;
-            label12.Text = "Добавление устройств";
-            // 
             // panel7
             // 
             panel7.Controls.Add(button6);
-            panel7.Location = new Point(10, 87);
+            panel7.Location = new Point(17, 76);
             panel7.Margin = new Padding(3, 4, 3, 4);
             panel7.Name = "panel7";
             panel7.Size = new Size(205, 51);
@@ -651,6 +641,17 @@ namespace WinFormsApp1
             button6.Text = "Запустить";
             button6.UseVisualStyleBackColor = false;
             button6.Click += button6_Click;
+            // 
+            // label12
+            // 
+            label12.AutoSize = true;
+            label12.Font = new Font("Segoe UI", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label12.ForeColor = Color.White;
+            label12.Location = new Point(23, 23);
+            label12.Name = "label12";
+            label12.Size = new Size(285, 32);
+            label12.TabIndex = 0;
+            label12.Text = "Добавление устройств";
             // 
             // label16
             // 
@@ -718,10 +719,10 @@ namespace WinFormsApp1
             panel8.Controls.Add(label18);
             panel8.Controls.Add(label17);
             panel8.Controls.Add(comboBox1);
-            panel8.Location = new Point(526, 57);
+            panel8.Location = new Point(491, 57);
             panel8.Margin = new Padding(3, 4, 3, 4);
             panel8.Name = "panel8";
-            panel8.Size = new Size(281, 389);
+            panel8.Size = new Size(316, 389);
             panel8.TabIndex = 10;
             // 
             // label28
@@ -729,7 +730,7 @@ namespace WinFormsApp1
             label28.AutoSize = true;
             label28.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label28.ForeColor = Color.White;
-            label28.Location = new Point(105, 345);
+            label28.Location = new Point(111, 350);
             label28.Name = "label28";
             label28.Size = new Size(18, 23);
             label28.TabIndex = 17;
@@ -740,7 +741,7 @@ namespace WinFormsApp1
             label27.AutoSize = true;
             label27.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label27.ForeColor = Color.White;
-            label27.Location = new Point(22, 341);
+            label27.Location = new Point(3, 345);
             label27.Name = "label27";
             label27.Size = new Size(79, 28);
             label27.TabIndex = 16;
@@ -749,7 +750,7 @@ namespace WinFormsApp1
             // textBox6
             // 
             textBox6.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox6.Location = new Point(173, 195);
+            textBox6.Location = new Point(199, 196);
             textBox6.Margin = new Padding(3, 4, 3, 4);
             textBox6.Name = "textBox6";
             textBox6.Size = new Size(97, 34);
@@ -758,7 +759,7 @@ namespace WinFormsApp1
             // textBox5
             // 
             textBox5.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            textBox5.Location = new Point(173, 149);
+            textBox5.Location = new Point(199, 150);
             textBox5.Margin = new Padding(3, 4, 3, 4);
             textBox5.Name = "textBox5";
             textBox5.Size = new Size(97, 34);
@@ -806,7 +807,7 @@ namespace WinFormsApp1
             label18.AutoSize = true;
             label18.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             label18.ForeColor = Color.White;
-            label18.Location = new Point(3, 76);
+            label18.Location = new Point(3, 82);
             label18.Name = "label18";
             label18.Size = new Size(76, 25);
             label18.TabIndex = 10;
@@ -828,7 +829,7 @@ namespace WinFormsApp1
             comboBox1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "Выдача", "Прием" });
-            comboBox1.Location = new Point(131, 73);
+            comboBox1.Location = new Point(158, 76);
             comboBox1.Margin = new Padding(3, 4, 3, 4);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(138, 36);

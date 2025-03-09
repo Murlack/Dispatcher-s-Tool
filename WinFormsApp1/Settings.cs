@@ -18,6 +18,7 @@ namespace WinFormsApp1
         public string _pathDataUses;
         public string _pathUsersData;
         public string _pathDeviceStatus;
+        public MysqlWork _mysql = new MysqlWork();
 
         public Settings()
         {
@@ -54,7 +55,35 @@ namespace WinFormsApp1
 
                 if (_xNode.Name == "PathdefviceStatus")
                     _pathDeviceStatus = _xNode.InnerText;
+
+                // новые настройки 
+
+                if (_xNode.Name == "port")
+                   _mysql.port = _xNode.InnerText;
+
+                if (_xNode.Name == "name")
+                    _mysql.name = _xNode.InnerText;
+
+                if (_xNode.Name == "password")
+                    _mysql.password = _xNode.InnerText;
+
+                if (_xNode.Name == "hostname")
+                    _mysql.hostname = _xNode.InnerText;
+
+                if (_xNode.Name == "database")
+                    _mysql.database = _xNode.InnerText;
+
+                if (_xNode.Name == "dataBasefileforanalysis")
+                    _mysql.dataBasefileforanalysis = _xNode.InnerText;
+
+                if (_xNode.Name == "dataBasedevicestatus")
+                    _mysql.dataBasedevicestatus = _xNode.InnerText;
+
+                if (_xNode.Name == "dataBaseusersdata")
+                    _mysql.dataBaseusersdata = _xNode.InnerText;
             }
+
+            _mysql._strconnect = $"server={_mysql.hostname};user={_mysql.name};database={_mysql.database};password={_mysql.password};";
         }
     }
 }

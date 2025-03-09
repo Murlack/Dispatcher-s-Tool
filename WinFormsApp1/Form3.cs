@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -9,6 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WinFormsApp1
 {
@@ -63,98 +65,113 @@ namespace WinFormsApp1
 
         private void button1_Click(object sender, EventArgs e)
         {
-            _xRoot = _xDocument.DocumentElement;
+            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+            label3.Text = "*";
 
-            foreach (XmlElement xmlElements in _xRoot)
+            if (textBox1.Text != "")
             {
-                foreach (XmlNode item in xmlElements)
+                try
                 {
-                    if (item.InnerText == textBox1.Text)
+                    connection.Open();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    string query = $"delete from fileforanalysis where fileforanalysis.NameOfDevice = '{textBox1.Text}' limit 1;";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
+
+                    while (reader.Read())
                     {
-                        _xRoot.RemoveChild(xmlElements);
+                        MessageBox.Show(reader[0].ToString());
                     }
+
+                    reader.Close();
+                    connection.Close();
+                    label3.Text = "Удалено";
+
                 }
             }
-
-            _xDocument.Save(_pathDocument + _settings._NameFileAnalyser + ".xml");
-            label3.Text = "Удалено";
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void button2_Click(object sender, EventArgs e) // Данные из файла анализа 
         {
             UpdateDataTeble();
         }
 
         private void UpdateDataTeble()
         {
-            dataGridView1.Rows.Clear();
-            dataGridView1.Columns.Clear();
-            InitializationPathVar(_settings._pathFileAnalysis);
-            _xDocument = GetDocument(_pathDocument, _settings._NameFileAnalyser + ".xml");
-            List<Data> datas = DateAnalys(_xDocument);
+            string query = $"select * from fileforanalysis";
+            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
-            dataGridView1.Columns.Add("", "Устройства");
-
-            foreach (Data data in datas)
+            try
             {
-                dataGridView1.Rows.Add(data._nameOfDev);
+                connection.Open();
+                dataGridView1.Rows.Clear();
+                dataGridView1.Columns.Clear();
+                dataGridView1.Columns.Add("", "id");
+                dataGridView1.Columns.Add("", "Устройства");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                MySqlCommand command = new MySqlCommand(query, connection);
+                MySqlDataReader reader = command.ExecuteReader();
+
+                while (reader.Read())
+                {
+                    dataGridView1.Rows.Add(reader[0], reader[1]);
+                }
             }
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            XmlDocument _xDoc = null;
-            FileInfo _fileInfo = null;
-            string _pathOfAnalysis = _settings._pathFileAnalysis;
-            string _pathOfDevice = "";
-            string _content =
-                "<?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n" +
-                "<operations>\r\n  " +
-                "<operation>\r\n    " +
-                "<deviceID>\r\n    </deviceID>\r\n    " +
-                "<userID>0000</userID>\r\n    " +
-                "<sdatetimeSTR>26.10.2001 16:52:10</sdatetimeSTR>\r\n   " +
-                " <edatetimeSTR>26.10.2001 16:52:11</edatetimeSTR>\r\n  " +
-                "</operation>\r\n " +
-                "</operations>  ";
+            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
-            _xDoc = _getDoc.GetXmlDocument(_settings._pathFileAnalysis, "\\FileForAnalysis.xml"); // загрузка файла с данными для анализа инвентаризации
-
-            _device = textBox2.Text;
-
-            if (_device != "")
+            if (textBox2.Text != "")
             {
-                _pathOfDevice = _deviceDefinitionName.DeviceDefinition(ref _device);
-                _fileInfo = new FileInfo(_pathOfDevice + _device + ".xml");
-
-                if (!_fileInfo.Exists)
+                try
                 {
-                    File.AppendAllTextAsync(_fileInfo.FullName, _content);
+                    connection.Open();
                 }
-
-                if (_xDoc.DocumentElement != null)
+                catch (Exception ex)
                 {
-                    _xRoot = _xDoc.DocumentElement;
+                    MessageBox.Show(ex.Message);
+                }
+                finally
+                {
+                    string query = $"insert into fileforanalysis (fileforanalysis.NameOfDevice) values ('{textBox2.Text}'); " +
+                        $"CREATE TABLE if not exists `{textBox2.Text}` (" +
+                        $"`{textBox2.Text}` int NOT NULL AUTO_INCREMENT," +
+                        $"`deviceID` varchar(45) NOT NULL," +
+                        $"`userID` varchar(45) NOT NULL," +
+                        $" `sdatetimeSTR` varchar(45) DEFAULT NULL," +
+                        $"  `edatetimeSTR` varchar(45) DEFAULT NULL," +
+                        $"  PRIMARY KEY (`{textBox2.Text}`)" +
+                        $" ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;";
+                    MySqlCommand command = new MySqlCommand(query, connection);
+                    MySqlDataReader reader = command.ExecuteReader();
 
-                    if (_xRoot != null)
+                    while (reader.Read())
                     {
-                        _xmlDevice = _xDoc.CreateElement("Device");
-                        _xmlNameOfDevice = _xDoc.CreateElement("NameOfDevice");
-                        _xmlTextName = _xDoc.CreateTextNode(_device);
-
-                        _xmlNameOfDevice.AppendChild(_xmlTextName);
-                        _xmlDevice.AppendChild(_xmlNameOfDevice);
-                        _xRoot.AppendChild(_xmlDevice);
-
-                        _xDoc.Save(_settings._pathFileAnalysis + "\\FileForAnalysis.xml");
-
-                        label6.Text = "Добавлено";
+                        MessageBox.Show(reader[0].ToString());
                     }
+
+                    reader.Close();
+                    connection.Close();
+                    label6.Text = "Добавлено";
                 }
-                else
-                {
-                    label6.Text = "Не добавлено";
-                }
+            }
+            else 
+            {
+                label6.Text = "Не добавлено";
             }
         }
     }
