@@ -23,4 +23,22 @@
 
 	<PathdefviceStatus>Settings\DeviceStatus\</PathdefviceStatus>
 	<!--Путь к файлу с информациями об устройствах-->
+
+	<!--Работа с Mysql-->
+	<port>3306</port>
+	<name>root</name>
+	<password>96985</password>
+	<hostname>localhost</hostname>
+	
+	<!--База данных-->
+	<database>dt</database>
+	
+	<!--Файл для анализа устройств-->
+	<dataBasefileforanalysis>fileforanalysis</dataBasefileforanalysis>
+	
+	<!--Состояние устройств-->
+	<dataBasedevicestatus>devicestatus</dataBasedevicestatus>
+	
+	<!--История пользователей-->
+	<dataBaseusersdata>usersdata</dataBaseusersdata>
 </Settings>
