@@ -69,10 +69,10 @@ namespace WinFormsApp1
             label3 = new Label();
             panel6 = new Panel();
             panel9 = new Panel();
-            label22 = new Label();
-            label21 = new Label();
             panel7 = new Panel();
             button6 = new Button();
+            label22 = new Label();
+            label21 = new Label();
             label12 = new Label();
             label16 = new Label();
             label15 = new Label();
@@ -581,9 +581,9 @@ namespace WinFormsApp1
             // panel9
             // 
             panel9.BackColor = Color.Black;
+            panel9.Controls.Add(panel7);
             panel9.Controls.Add(label22);
             panel9.Controls.Add(label21);
-            panel9.Controls.Add(panel7);
             panel9.Controls.Add(label12);
             panel9.Controls.Add(label16);
             panel9.Controls.Add(label15);
@@ -593,30 +593,8 @@ namespace WinFormsApp1
             panel9.Location = new Point(17, 57);
             panel9.Margin = new Padding(3, 4, 3, 4);
             panel9.Name = "panel9";
-            panel9.Size = new Size(322, 389);
+            panel9.Size = new Size(421, 389);
             panel9.TabIndex = 11;
-            // 
-            // label22
-            // 
-            label22.AutoSize = true;
-            label22.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label22.ForeColor = Color.White;
-            label22.Location = new Point(142, 195);
-            label22.Name = "label22";
-            label22.Size = new Size(184, 28);
-            label22.TabIndex = 9;
-            label22.Text = "Выберите режим";
-            // 
-            // label21
-            // 
-            label21.AutoSize = true;
-            label21.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            label21.ForeColor = Color.White;
-            label21.Location = new Point(13, 153);
-            label21.Name = "label21";
-            label21.Size = new Size(85, 28);
-            label21.TabIndex = 8;
-            label21.Text = "Режим:";
             // 
             // panel7
             // 
@@ -641,6 +619,28 @@ namespace WinFormsApp1
             button6.Text = "Запустить";
             button6.UseVisualStyleBackColor = false;
             button6.Click += button6_Click;
+            // 
+            // label22
+            // 
+            label22.AutoSize = true;
+            label22.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label22.ForeColor = Color.White;
+            label22.Location = new Point(192, 199);
+            label22.Name = "label22";
+            label22.Size = new Size(184, 28);
+            label22.TabIndex = 9;
+            label22.Text = "Выберите режим";
+            // 
+            // label21
+            // 
+            label21.AutoSize = true;
+            label21.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            label21.ForeColor = Color.White;
+            label21.Location = new Point(13, 153);
+            label21.Name = "label21";
+            label21.Size = new Size(85, 28);
+            label21.TabIndex = 8;
+            label21.Text = "Режим:";
             // 
             // label12
             // 
@@ -669,7 +669,7 @@ namespace WinFormsApp1
             label15.AutoSize = true;
             label15.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label15.ForeColor = Color.White;
-            label15.Location = new Point(98, 153);
+            label15.Location = new Point(192, 156);
             label15.Name = "label15";
             label15.Size = new Size(184, 28);
             label15.TabIndex = 6;
@@ -1011,12 +1011,12 @@ namespace WinFormsApp1
             BackColor = Color.Black;
             ClientSize = new Size(1094, 593);
             Controls.Add(menuStrip1);
-            Controls.Add(panel1);
             Controls.Add(panel6);
             Controls.Add(panel3);
             Controls.Add(panel4);
             Controls.Add(panel10);
             Controls.Add(panel2);
+            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;

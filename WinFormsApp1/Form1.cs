@@ -30,7 +30,7 @@ namespace WinFormsApp1
         private string? _name = "";
         private string? _nameOfPerson = "";
         private string? _departmentOfUser = "";
-        private string _deviceNumber = ""; // номер устройства
+        private string _deviceNumber = ""; // номер устройства -------------------------------------------------------------------------------------------------------
         private string _modeWork = ""; // режим
         private SoundPlayer _soundPlayerM001;
         private SoundPlayer _soundPlayerM002;
@@ -352,7 +352,7 @@ namespace WinFormsApp1
                 }
             }
         }
-        private void textBox4_KeyUp(object sender, KeyEventArgs e)
+        private void textBox4_KeyUp(object sender, KeyEventArgs e) //авто режим
         {
             string _mode = "";
 
@@ -467,17 +467,21 @@ namespace WinFormsApp1
                         connection.Close();
 
                     }
+                    _numberPerson = "";
                     _deviceNumber = "";
                 }
+                //_numberPerson = "";
+                //_deviceNumber = "";
+
             }
         }
         private void button6_Click(object sender, EventArgs e)
         {
             textBox4.Focus();
         }
-        private void button7_Click(object sender, EventArgs e)
+        private void button7_Click(object sender, EventArgs e) //ручной режим
         {
-            string _deviceNumber, _personNumber;
+            string _deviceNumberCo, _personNumber;
 
             if (comboBox1.Text == "Выдача")
             {
@@ -486,7 +490,7 @@ namespace WinFormsApp1
                 if (_modeWork != "" && textBox5.Text != "" && textBox6.Text != "")
                 {
                     _personNumber = textBox5.Text;
-                    _deviceNumber = textBox6.Text;
+                    _deviceNumberCo = textBox6.Text;
                     MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
                     try
                     {
@@ -498,7 +502,7 @@ namespace WinFormsApp1
                     }
                     finally
                     {
-                        string query = $"insert into {_deviceNumber} (deviceID,userID,sdatetimeSTR,edatetimeSTR) values ('{_deviceNumber}','{_personNumber}','{DateTime.Now}','');";
+                        string query = $"insert into {_deviceNumberCo} (deviceID,userID,sdatetimeSTR,edatetimeSTR) values ('{_deviceNumberCo}','{_personNumber}','{DateTime.Now}','');";
 
                         MySqlCommand command = new MySqlCommand(query, connection);
                         MySqlDataReader reader = command.ExecuteReader();
@@ -513,7 +517,7 @@ namespace WinFormsApp1
 
                     }
 
-                    label28.Text = $"{_deviceNumber} выдан";
+                    label28.Text = $"{_deviceNumberCo} выдан";
                 }
                 else
                 {
@@ -526,7 +530,7 @@ namespace WinFormsApp1
 
                 if (textBox6.Text != "")
                 {
-                    _deviceNumber = textBox6.Text;
+                    _deviceNumberCo = textBox6.Text;
 
                     MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
                     try
@@ -539,7 +543,7 @@ namespace WinFormsApp1
                     }
                     finally
                     {
-                        string query = $"UPDATE {_deviceNumber} SET edatetimeSTR = '{DateTime.Now}' WHERE edatetimeSTR = '';";
+                        string query = $"UPDATE {_deviceNumberCo} SET edatetimeSTR = '{DateTime.Now}' WHERE edatetimeSTR = '';";
 
                         MySqlCommand command = new MySqlCommand(query, connection);
                         MySqlDataReader reader = command.ExecuteReader();
@@ -554,7 +558,7 @@ namespace WinFormsApp1
 
                     }
 
-                    label28.Text = $"{_deviceNumber} принят";
+                    label28.Text = $"{_deviceNumberCo} принят";
                 }
                 else
                 {
@@ -615,8 +619,6 @@ namespace WinFormsApp1
             _genColumn.GenCol(this.dataGridView7, 3);
             string query = $"select * from {_settings._mysql.dataBaseusersdata};";
             MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
-            
-
 
             try
             {
