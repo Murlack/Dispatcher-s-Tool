@@ -700,7 +700,7 @@ namespace WinFormsApp1
             label13.AutoSize = true;
             label13.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             label13.ForeColor = Color.White;
-            label13.Location = new Point(182, 245);
+            label13.Location = new Point(287, 241);
             label13.Name = "label13";
             label13.Size = new Size(21, 28);
             label13.TabIndex = 3;
