@@ -16,11 +16,11 @@ namespace WinFormsApp1
         private Panel[]? Panels;
         private GetDocument? _getDocument = new();
         private Settings? _settings = new();
-        private XmlElement? _xRoot = null;
-        private XmlDocument? _xDoc = new();
+        //private XmlElement? _xRoot = null;
+        //private XmlDocument? _xDoc = new();
         private GenerateColumn? _genColumn = new();
-        private XmlElement? _xAnyDoc;
-        private CheckData? _chkData = new();
+        //private XmlElement? _xAnyDoc;
+        //private CheckData? _chkData = new();
         DeviceDefinitionName _deviceDefinitionName = new();
         private string? _pathOfDevace = "";
         private string? _numberPerson = ""; // бейдж
@@ -92,11 +92,6 @@ namespace WinFormsApp1
 
             string _nameOfDevice = textBox1.Text;
             int _numberDataShow = (textBox2.Text == "") ? 1 : Convert.ToInt32(textBox2.Text);
-            //string query = $"SELECT {_nameOfDevice}.{_nameOfDevice}, {_nameOfDevice}.deviceID, {_nameOfDevice}.userID, {_settings._mysql.dataBaseusersdata}.UserNames, {_settings._mysql.dataBaseusersdata}.UserDepartment, {_nameOfDevice}.sdatetimeSTR, {_nameOfDevice}.edatetimeSTR " +
-            //    $"FROM {_settings._mysql.database}.{_nameOfDevice},{_settings._mysql.dataBaseusersdata} " +
-            //    $"where {_settings._mysql.database}.{_nameOfDevice}.userID = {_settings._mysql.dataBaseusersdata}.UserID " +
-            //    $"order by {_settings._mysql.database}.{_nameOfDevice}.{_nameOfDevice} " +
-            //    $"desc limit {_numberDataShow};";
             string query = $"select dt.{_nameOfDevice}.{_nameOfDevice}, dt.{_nameOfDevice}.deviceID,dt.{_nameOfDevice}.userID,dt.usersdata.UserNames,dt.usersdata.UserDepartment,dt.{_nameOfDevice}.sdatetimeSTR,dt.{_nameOfDevice}.edatetimeSTR" +
                 $" from {_nameOfDevice} " +
                 $"left join dt.usersdata on dt.usersdata.UserID = {_nameOfDevice}.userID " +
@@ -148,7 +143,6 @@ namespace WinFormsApp1
             }
             finally
             {
-
                 command = new MySqlCommand(queryfileforanalysis, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -310,12 +304,11 @@ namespace WinFormsApp1
                 reader.Close();
                 connection.Close();
 
-
                 int counter1 = 0;
                 int counter2 = 0;
+
                 foreach (string d in dev)
                 {
-
                     try
                     {
                         connection.Open();
@@ -343,12 +336,10 @@ namespace WinFormsApp1
                                 label11.Text = $"{++counter2}";
                             }
                         }
-
                         
                         reader.Close();
                         connection.Close();
                     }
-
                 }
             }
         }
@@ -396,7 +387,6 @@ namespace WinFormsApp1
                         {
                             _deviceNumber = _mode;
                             _pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _deviceNumber);
-                            _xDoc = _getDocument.GetXmlDocument(_pathOfDevace, $"\\{_deviceNumber}.xml");
 
                             if (_modeWork == "M001")
                             {
@@ -407,12 +397,14 @@ namespace WinFormsApp1
                                 label22.Text = "Введите устройство или режим";
                             }
                         }
-                        break;
+
+                    break;
                 }
 
-                if (_modeWork == "M001" && _numberPerson != "" && _deviceNumber != "")
+                if (_modeWork == "M001" && _numberPerson != "" && _deviceNumber != "") // выдача
                 {
                     MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+
                     try
                     {
                         connection.Open();
@@ -440,9 +432,10 @@ namespace WinFormsApp1
                     _numberPerson = "";
                     _deviceNumber = "";
                 }
-                else if (_modeWork == "M002" && _deviceNumber != "")
+                else if (_modeWork == "M002" && _deviceNumber != "") // прием
                 {
                     MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+
                     try
                     {
                         connection.Open();
@@ -470,16 +463,13 @@ namespace WinFormsApp1
                     _numberPerson = "";
                     _deviceNumber = "";
                 }
-                //_numberPerson = "";
-                //_deviceNumber = "";
-
             }
         }
-        private void button6_Click(object sender, EventArgs e)
+        private void button6_Click(object sender, EventArgs e) // фокус на textBox4 для работы со сканером
         {
             textBox4.Focus();
         }
-        private void button7_Click(object sender, EventArgs e) //ручной режим
+        private void button7_Click(object sender, EventArgs e) // ручной режим
         {
             string _deviceNumberCo, _personNumber;
 
@@ -571,11 +561,11 @@ namespace WinFormsApp1
                 MessageBox.Show("Заполните поля для ввода");
             }
         }
-        private void button8_Click(object sender, EventArgs e)
+        private void button8_Click(object sender, EventArgs e) // показать 3 форму
         {
             new Form3().Show();
         }
-        private void button9_Click(object sender, EventArgs e)
+        private void button9_Click(object sender, EventArgs e) // добавление пользователя
         {
             string _names, _userId, _department;
             MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
@@ -603,7 +593,6 @@ namespace WinFormsApp1
                     }
 
                     label26.Text = "Успешно добавлен";
-
 
                     connection.Close();
                 }
@@ -639,191 +628,19 @@ namespace WinFormsApp1
                 }
             }
         }
-        private void button11_Click(object sender, EventArgs e)
+        private void button11_Click(object sender, EventArgs e) // показать 4 форму
         {
             new Form4().Show();
         }
-        private void button12_Click(object sender, EventArgs e)
+        private void button12_Click(object sender, EventArgs e) // показать 5 форму
         {
             new Form5().Show();
         }
-        private void DeliteDataFromHistoryUses(string _nameOfDocument, string _devicesCopy)
-        {
-            XmlDocument _xRootHistoryUses = _getDocument.GetXmlDocument(_settings._pathDataUses, _nameOfDocument);
-            XmlElement _xDocElem = _xRootHistoryUses.DocumentElement;
-
-            if (_xRootHistoryUses.HasChildNodes)
-            {
-                foreach (XmlElement _xmlElems in _xDocElem.ChildNodes)
-                {
-                    foreach (XmlNode _xmlNodeChild in _xmlElems.ChildNodes)
-                    {
-                        if (_xmlNodeChild.Name == "deviceID" && _xmlNodeChild.InnerText == _devicesCopy)
-                        {
-                            _xDocElem.RemoveChild(_xmlNodeChild.ParentNode);
-                            _xRootHistoryUses.Save(_settings._pathDataUses + _nameOfDocument);
-                        }
-                    }
-                }
-            }
-        }
-        private void AddDataInDocument(XmlDocument _xDocCopy, string _modeCopy, string _devicesCopy, string _tableNumberCopy, string _pathOfDevicesCopy)
-        {
-            XmlElement _operation = _xDocCopy.CreateElement("operation");
-            XmlElement _deviceID = _xDocCopy.CreateElement("deviceID");
-            XmlElement _userID = _xDocCopy.CreateElement("userID");
-            XmlElement _sdatetimeSTR = _xDocCopy.CreateElement("sdatetimeSTR");
-            XmlElement _edatetimeSTR = _xDocCopy.CreateElement("edatetimeSTR");
-
-            XmlText _deviceIDText = null;
-            XmlText _userIDText = null;
-            XmlText _sdatetimeSTRText = null;
-            XmlText _edatetimeSTRText = null;
-
-            if (_modeCopy == "M001")
-            {
-                _deviceIDText = _xDocCopy.CreateTextNode(_devicesCopy);
-                _userIDText = _xDocCopy.CreateTextNode(_tableNumberCopy);
-                _sdatetimeSTRText = _xDocCopy.CreateTextNode($"{DateTime.Now}");
-                _edatetimeSTRText = _xDocCopy.CreateTextNode($"");
-
-                _deviceID.AppendChild(_deviceIDText);
-                _userID.AppendChild(_userIDText);
-                _sdatetimeSTR.AppendChild(_sdatetimeSTRText);
-                _edatetimeSTR.AppendChild(_edatetimeSTRText);
-
-                _operation.AppendChild(_deviceID);
-                _operation.AppendChild(_userID);
-                _operation.AppendChild(_sdatetimeSTR);
-                _operation.AppendChild(_edatetimeSTR);
-
-                XmlElement _xRoot = _xDocCopy.DocumentElement;
-
-                if (_xRoot != null)
-                {
-                    _xRoot.AppendChild(_operation);
-                }
-            }
-            else if (_modeCopy == "M002")
-            {
-                //DeliteDataFromHistoryUses("devices.xml", _devicesCopy);
-
-                XmlElement _xelem = _xDocCopy.DocumentElement;
-
-                foreach (XmlNode node in _xelem.ChildNodes)
-                {
-
-                    foreach (XmlNode _nodeLastChild in node.ChildNodes)
-                    {
-                        if (_nodeLastChild.Name == "edatetimeSTR" && _nodeLastChild.InnerText == "")
-                            _nodeLastChild.InnerText = DateTime.Now + "";
-                    }
-                }
-            }
-
-            _xDocCopy.Save(_pathOfDevicesCopy);
-
-        }
-        private void ClearData(DataGridView data)
+        private void ClearData(DataGridView data) // очищаем данные в таблице
         {
             data.Columns.Clear(); // чистим колонны
             data.Rows.Clear(); // чистим строки 
-        } // Очищаем данные в таблице
-        private List<string> AnalysisFileSorting(List<string> _namesOfdevices)
-        {
-            string? _storage = "";
-            List<string> _st = new();
-
-            _xDoc = _getDocument.GetXmlDocument(_settings._pathFileAnalysis, "FileForAnalysis.xml");
-            _xRoot = _xDoc.DocumentElement;
-
-            foreach (XmlElement _xElems in _xRoot.ChildNodes) // заполнение первичных данных
-            {
-                foreach (XmlNode _xNode in _xElems.ChildNodes)
-                {
-                    _namesOfdevices.Add(_xNode.InnerText);
-                }
-            }
-
-            for (int i = 0; i < _namesOfdevices.Count; i++) // сортировка от повторяющихся данных
-            {
-                if (_namesOfdevices[i] != null)
-                {
-                    _storage = _namesOfdevices[i];
-                    _st.Add(_namesOfdevices[i]);
-                }
-                for (int l = i + 1; l < _namesOfdevices.Count; l++)
-                {
-                    if (_namesOfdevices[l] == _storage)
-                        _namesOfdevices[l] = null;
-                }
-            }
-
-            return _st;
-        }
-        private void RenderingDataGread(List<DataDev> _data, DataGridView _gridView, int _numberRenderGrid)
-        {
-            int n_1 = 0, // ограничивающая переменная
-                n_2 = 0, // ограничивающая переменная
-                p_1 = 1, // число выданных
-                p_2 = 1; // число принятых
-
-            for (int i = 0; i < _data.Count; i++)
-            {
-                foreach (XmlElement _xitem in _data[i]._element)
-                {
-                    switch (_numberRenderGrid)
-                    {
-                        case 1:
-                            if (_xitem.Name == "deviceID")
-                                _name = _data[i]._nameDev;
-
-                            if (_xitem.Name == "userID")
-                                _numberPerson = _xitem.InnerText;
-
-                            if (_xitem.Name == "sdatetimeSTR")
-                                _sDate = _xitem.InnerText;
-                            n_1++;
-                            break;
-
-                        case 2:
-                            if (_xitem.Name == "deviceID")
-                                _name = _data[i]._nameDev;
-
-                            if (_xitem.Name == "userID")
-                                _numberPerson = _xitem.InnerText;
-
-                            if (_xitem.Name == "edatetimeSTR")
-                                _eDate = _xitem.InnerText;
-                            n_2++;
-                            break;
-                    }
-
-                    if (_numberRenderGrid == 1)
-                    {
-                        if (n_1 == 4)
-                        {
-                            _gridView.Rows.Add(p_1, _name, _numberPerson, _sDate);
-                            label10.Text = p_1 + "";
-                            n_1 = 0;
-                            p_1++;
-                        }
-
-                    }
-                    else
-                    {
-                        if (n_2 == 4)
-                        {
-                            _gridView.Rows.Add(p_2, _name, _numberPerson, _eDate);
-                            label11.Text = p_2 + "";
-                            n_2 = 0;
-                            p_2++;
-                        }
-                    }
-
-                }
-            }
-        }
+        } 
         private void button13_Click(object sender, EventArgs e)
         {
             new Form7().Show();

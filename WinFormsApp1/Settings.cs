@@ -47,8 +47,8 @@ namespace WinFormsApp1
                     _NameFileAnalyser = _xNode.Attributes.GetNamedItem("Filename").InnerText;
                 }
 
-                if (_xNode.Name == "FileForDataUse")
-                    _pathDataUses = _xNode.InnerText;
+                //if (_xNode.Name == "FileForDataUse")
+                //    _pathDataUses = _xNode.InnerText;
 
                 if (_xNode.Name == "PathUsersData")
                     _pathUsersData = _xNode.InnerText;
