@@ -728,7 +728,7 @@ namespace WinFormsApp1
         {
             data.Columns.Clear(); // чистим колонны
             data.Rows.Clear(); // чистим строки 
-        }
+        } // Очищаем данные в таблице
         private List<string> AnalysisFileSorting(List<string> _namesOfdevices)
         {
             string? _storage = "";

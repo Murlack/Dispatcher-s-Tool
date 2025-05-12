@@ -15,7 +15,7 @@
 	<FileForAnalysis Filename="FileForAnalysis">Settings\FileForAnalysis\</FileForAnalysis>
 	<!--Путь к файлу с устройствами для инвентаризации-->
 	
-	<FileForDataUse>C:\Users\User\Desktop\DT_2.0\data\</FileForDataUse>
+	<!--<FileForDataUse>C:\Users\User\Desktop\DT_2.0\data\</FileForDataUse>-->
 	<!--Путь к файлу с историей использованных устройств за текущую смену-->
 
 	<PathUsersData>Settings\UsersData\</PathUsersData>
