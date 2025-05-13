@@ -17,10 +17,7 @@ namespace WinFormsApp1
     public partial class Form5 : Form
     {
         private Settings _settings = new Settings();
-        private GetDocument _getDocument = new GetDocument();
         private GenerateColumn _generateColumn = new GenerateColumn();
-        private XmlDocument _xDocument;
-        private XmlElement _xRoot;
         public Form5()
         {
             InitializeComponent();
@@ -54,32 +51,6 @@ namespace WinFormsApp1
                     reader.Close();
                     connection.Close();
                 }
-                //_xDocument = _getDocument.GetXmlDocument(_settings._pathDeviceStatus, "DeviceStatus.xml");
-                //_xRoot = _xDocument.DocumentElement;
-
-                //if (_xRoot != null)
-                //{
-                //    XmlElement _xData = _xDocument.CreateElement("Data");
-                //    XmlElement _xDeviceID = _xDocument.CreateElement("DeviceID");
-                //    XmlElement _xDeviceDescription = _xDocument.CreateElement("DeviceDescription");
-                //    XmlElement _xComment = _xDocument.CreateElement("Comment");
-
-                //    XmlText _xUserIDText = _xDocument.CreateTextNode(textBox1.Text);
-                //    XmlText _xDeviceDescriptionText = _xDocument.CreateTextNode(textBox2.Text);
-                //    XmlText _xCommentText = _xDocument.CreateTextNode((textBox3.Text == "") ? "" : textBox3.Text);
-
-                //    _xDeviceID.AppendChild(_xUserIDText);
-                //    _xDeviceDescription.AppendChild(_xDeviceDescriptionText);
-                //    _xComment.AppendChild(_xCommentText);
-
-                //    _xData.AppendChild(_xDeviceID);
-                //    _xData.AppendChild(_xDeviceDescription);
-                //    _xData.AppendChild(_xComment);
-
-                //    _xRoot.AppendChild(_xData);
-
-                //    _xDocument.Save(_settings._pathDeviceStatus + "DeviceStatus.xml");
-                //}
             }
             else
             {
