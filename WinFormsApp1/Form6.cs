@@ -14,13 +14,11 @@ namespace WinFormsApp1
 {
     public partial class Form6 : Form
     {
-        private GetDocument _getDocument = new GetDocument();
         private Settings _settings = new Settings();
-        private XmlDocument _xDocument;
-        private XmlElement _xRoot;
         public Form6()
         {
             InitializeComponent();
+            label3.Text = "*";
         }
 
         private void button1_Click(object sender, EventArgs e)
