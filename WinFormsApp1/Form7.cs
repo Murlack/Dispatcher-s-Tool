@@ -36,7 +36,6 @@ namespace WinFormsApp1
 
             List<StatsDevices> arr = WorkOnXml.TakingDataFromDeviceStates();
             int _isExists = 0;
-
             List<StatsDevices> list = new List<StatsDevices>();
             List<string> NoList = new List<string>();
             StatsDevices itemStatsDevices = null;
