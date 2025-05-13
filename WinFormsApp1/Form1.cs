@@ -10,26 +10,12 @@ namespace WinFormsApp1
 {
     public partial class Form1 : Form
     {
-        private List<User> _dataUsers = new(); // данные о пользовател€х
-        private List<DeviceStatus> _deviceStatus = new(); // данные о состо€нии устройств
         private OpenPanels? _openPanels;
         private Panel[]? Panels;
-        private GetDocument? _getDocument = new();
         private Settings? _settings = new();
-        //private XmlElement? _xRoot = null;
-        //private XmlDocument? _xDoc = new();
         private GenerateColumn? _genColumn = new();
-        //private XmlElement? _xAnyDoc;
-        //private CheckData? _chkData = new();
         DeviceDefinitionName _deviceDefinitionName = new();
-        private string? _pathOfDevace = "";
         private string? _numberPerson = ""; // бейдж
-        private string? _sDate = "";
-        private string? _eDate = "";
-        private int _counter = 0; // счетчик 
-        private string? _name = "";
-        private string? _nameOfPerson = "";
-        private string? _departmentOfUser = "";
         private string _deviceNumber = ""; // номер устройства -------------------------------------------------------------------------------------------------------
         private string _modeWork = ""; // режим
         private SoundPlayer _soundPlayerM001;
@@ -386,7 +372,8 @@ namespace WinFormsApp1
                         else
                         {
                             _deviceNumber = _mode;
-                            _pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _deviceNumber);
+                            //_pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _deviceNumber);
+                            _deviceDefinitionName.DeviceDefinition(ref _deviceNumber);
 
                             if (_modeWork == "M001")
                             {

@@ -9,7 +9,7 @@ namespace WinFormsApp1
 {
     public class DeviceDefinitionName
     {
-        public string DeviceDefinition(ref string _nameOfDevice)
+        public void DeviceDefinition(ref string _nameOfDevice)
         {
             Settings _settings = new Settings();
             char[] _str = _nameOfDevice.ToCharArray();
@@ -25,13 +25,13 @@ namespace WinFormsApp1
                         _str[1] = 'A';
                         _str[2] = 'B';
                         _nameOfDevice = GenName(_str);
-                        return _settings._pathPhoneTables;
+                        //return _settings._pathPhoneTables;
                     }
                     else
                     {
                         _str[0] = 'T';
                         _nameOfDevice = GenName(_str);
-                        return _settings._pathPhones;
+                        //return _settings._pathPhones;
                     }
                 }
 
@@ -39,7 +39,7 @@ namespace WinFormsApp1
                 {
                     _str[0] = 'P';
                     _nameOfDevice = GenName(_str);
-                    return _settings._pathPowerbank;
+                    //return _settings._pathPowerbank;
                 }
 
                 
@@ -49,7 +49,7 @@ namespace WinFormsApp1
                 MessageBox.Show($"Введите название устройства, ОШИБКА {exeption}");
             }
 
-            return "";
+            //return "";
         }
 
         private string GenName(char[] chars)
