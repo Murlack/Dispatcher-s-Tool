@@ -16,19 +16,7 @@ namespace WinFormsApp1
 {
     public partial class Form3 : Form
     {
-        private GetDocument _getDocument = new();
-        private XmlDocument _xDocument = new();
         private Settings _settings = new();
-        private string _pathDocument;
-        private XmlElement _xRoot;
-
-        private GetDocument _getDoc = new GetDocument(); // объект загрузки документа
-        private XmlElement _xmlDevice = null;
-        private XmlElement _xmlNameOfDevice = null;
-        private XmlText _xmlTextName = null;
-        private DeviceDefinitionName _deviceDefinitionName = new DeviceDefinitionName();
-
-        private string _device = "";
         public Form3()
         {
             InitializeComponent();
@@ -37,30 +25,6 @@ namespace WinFormsApp1
         private void Form3_Load(object sender, EventArgs e)
         {
             UpdateDataTeble();
-        }
-
-        private XmlDocument GetDocument(string _path, string _nameOfFile)
-        {
-            return _getDocument.GetXmlDocument(_path, _nameOfFile);
-        }
-        private void InitializationPathVar(string _path)
-        {
-            _pathDocument = _path;
-        }
-        private List<Data> DateAnalys(XmlDocument _xDoc)
-        {
-            XmlElement _xmlElement = _xDoc.DocumentElement;
-            List<Data> _data = new List<Data>();
-
-            foreach (XmlElement _elements in _xmlElement.ChildNodes)
-            {
-                foreach (XmlNode item in _elements.ChildNodes)
-                {
-                    _data.Add(new Data() { _nameOfDev = item.InnerText });
-                }
-            }
-
-            return _data;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -174,9 +138,5 @@ namespace WinFormsApp1
                 label6.Text = "Не добавлено";
             }
         }
-    }
-    public struct Data
-    {
-        public string _nameOfDev;
     }
 }
