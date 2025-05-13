@@ -3,25 +3,25 @@
 	<PathOfSettings>Settings\</PathOfSettings>
 	<!--Путь к файлу с настройками-->
 	
-	<PathOfPhones>data\history\phones\</PathOfPhones>
+	<!--<PathOfPhones>data\history\phones\</PathOfPhones>-->
 	<!--Путь к файлу с телефонами-->
 	
-	<PathOfPowerBanks>data\history\powerbanks\</PathOfPowerBanks>
+	<!--<PathOfPowerBanks>data\history\powerbanks\</PathOfPowerBanks>-->
 	<!--Путь к файлу с PowerBanks-->
 	
-	<PathOfTables>data\history\tablets\</PathOfTables>
+	<!--<PathOfTables>data\history\tablets\</PathOfTables>-->
 	<!--Путь к файлу с планшетами-->
 	
-	<FileForAnalysis Filename="FileForAnalysis">Settings\FileForAnalysis\</FileForAnalysis>
+	<!--<FileForAnalysis Filename="FileForAnalysis">Settings\FileForAnalysis\</FileForAnalysis>-->
 	<!--Путь к файлу с устройствами для инвентаризации-->
 	
 	<!--<FileForDataUse>C:\Users\User\Desktop\DT_2.0\data\</FileForDataUse>-->
 	<!--Путь к файлу с историей использованных устройств за текущую смену-->
 
-	<PathUsersData>Settings\UsersData\</PathUsersData>
+	<!--<PathUsersData>Settings\UsersData\</PathUsersData>-->
 	<!--Путь к файлу с данными пользователей-->
 
-	<PathdefviceStatus>Settings\DeviceStatus\</PathdefviceStatus>
+	<!--<PathdefviceStatus>Settings\DeviceStatus\</PathdefviceStatus>-->
 	<!--Путь к файлу с информациями об устройствах-->
 
 	<!--Работа с Mysql-->
