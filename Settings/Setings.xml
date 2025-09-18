@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Settings>
+	<PathOfSettings>Settings\</PathOfSettings>
+	
+	<!--Работа с Mysql-->
+	<port>3306</port>
+	<name>root</name>
+	<password>96985</password>
+	<hostname>localhost</hostname>
+	
+	<!--База данных-->
+	<database>dt</database>
+	
+	<!--Файл для анализа устройств-->
+	<dataBasefileforanalysis>fileforanalysis</dataBasefileforanalysis>
+	
+	<!--Состояние устройств-->
+	<dataBasedevicestatus>devicestatus</dataBasedevicestatus>
+	
+	<!--История пользователей-->
+	<dataBaseusersdata>usersdata</dataBaseusersdata>
+</Settings>
