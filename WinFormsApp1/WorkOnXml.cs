@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
-using System.Xml.Linq;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.Xml;
 
 namespace WinFormsApp1
 {
@@ -73,7 +65,10 @@ namespace WinFormsApp1
                     return _devices;
                 }
             }
-            catch (Exception e) { MessageBox.Show(e.ToString()); }
+            catch (Exception e) 
+            { 
+                MessageBox.Show(e.ToString()); 
+            }
 
             return new List<StatsDevices>();
         }

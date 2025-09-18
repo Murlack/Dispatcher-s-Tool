@@ -1,16 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Xml.Linq;
 
 namespace WinFormsApp1
 {
@@ -33,13 +21,6 @@ namespace WinFormsApp1
                 try
                 {
                     connection.Open();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader reader = command.ExecuteReader();
 
@@ -50,6 +31,10 @@ namespace WinFormsApp1
 
                     reader.Close();
                     connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
@@ -65,14 +50,7 @@ namespace WinFormsApp1
             try
             {
                 connection.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                MySqlCommand command = new MySqlCommand(query,connection);
+                MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
                 dataGridView1.Columns.Clear();
                 _generateColumn.GenCol(this.dataGridView1, 4);
@@ -82,7 +60,10 @@ namespace WinFormsApp1
                     dataGridView1.Rows.Add(reader[0], reader[1], reader[2], reader[3]);
                 }
             }
-
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private void button3_Click(object sender, EventArgs e)
         {

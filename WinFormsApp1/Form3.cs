@@ -1,16 +1,4 @@
 ﻿using MySql.Data.MySqlClient;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using System.Xml;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace WinFormsApp1
 {
@@ -37,13 +25,6 @@ namespace WinFormsApp1
                 try
                 {
                     connection.Open();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
                     string query = $"delete from fileforanalysis where fileforanalysis.NameOfDevice = '{textBox1.Text}' limit 1;";
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader reader = command.ExecuteReader();
@@ -56,7 +37,10 @@ namespace WinFormsApp1
                     reader.Close();
                     connection.Close();
                     label3.Text = "Удалено";
-
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
@@ -78,13 +62,6 @@ namespace WinFormsApp1
                 dataGridView1.Columns.Clear();
                 dataGridView1.Columns.Add("", "id");
                 dataGridView1.Columns.Add("", "Устройства");
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -92,6 +69,10 @@ namespace WinFormsApp1
                 {
                     dataGridView1.Rows.Add(reader[0], reader[1]);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
 
@@ -104,13 +85,6 @@ namespace WinFormsApp1
                 try
                 {
                     connection.Open();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
                     string query = $"insert into fileforanalysis (fileforanalysis.NameOfDevice) values ('{textBox2.Text}'); " +
                         $"CREATE TABLE if not exists `{textBox2.Text}` (" +
                         $"`{textBox2.Text}` int NOT NULL AUTO_INCREMENT," +
@@ -131,6 +105,10 @@ namespace WinFormsApp1
                     reader.Close();
                     connection.Close();
                     label6.Text = "Добавлено";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
             else 

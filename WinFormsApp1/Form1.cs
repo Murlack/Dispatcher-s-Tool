@@ -1,10 +1,5 @@
-using System.Xml;
 using System.Media;
 using MySql.Data.MySqlClient;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
-using System.Xml.Linq;
-using System.Diagnostics.Metrics;
-using System.Reflection;
 
 namespace WinFormsApp1
 {
@@ -89,13 +84,6 @@ namespace WinFormsApp1
             try
             {
                 conn.Open();
-            }
-            catch (MySqlException ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
                 ClearData(dataGridView1);
                 _genColumn.GenCol(this.dataGridView1, 0); // создаем колонны
 
@@ -110,6 +98,10 @@ namespace WinFormsApp1
                 reader.Close();
                 conn.Close();
             }
+            catch (MySqlException ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
         private List<string> Device()
         {
@@ -122,13 +114,6 @@ namespace WinFormsApp1
             try
             {
                 connection.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
                 command = new MySqlCommand(queryfileforanalysis, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -139,6 +124,10 @@ namespace WinFormsApp1
 
                 reader.Close();
                 connection.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
             return dev;
@@ -167,13 +156,6 @@ namespace WinFormsApp1
                 try
                 {
                     connection.Open();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
                     command = new MySqlCommand(query, connection);
                     reader = command.ExecuteReader();
 
@@ -182,9 +164,12 @@ namespace WinFormsApp1
                         dataGridView2.Rows.Add(reader[0], reader[1], reader[2], reader[3], reader[4], reader[5], reader[6], reader[7], reader[8]);
                     }
 
-
                     reader.Close();
                     connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
         }
@@ -200,13 +185,6 @@ namespace WinFormsApp1
             try
             {
                 connection.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
                 _numberPerson = (textBox3.Text != "") ? textBox3.Text : "0001"; // бэйдж
                 ClearData(dataGridView3);
                 _genColumn.GenCol(dataGridView3, -1);
@@ -225,33 +203,26 @@ namespace WinFormsApp1
 
                 foreach (string d in dev)
                 {
-                    try
+                    connection1.Open();
+                    string queryDev = $"select {d}.{d}, {d}.deviceID, {d}.userID, {d}.sdatetimeSTR, " +
+                            $"{d}.edatetimeSTR from {d} where {d}.userID = '{_numberPerson}' " +
+                            $"order by {d}.{d} desc";
+
+                    command1 = new MySqlCommand(queryDev, connection1);
+                    MySqlDataReader reader1 = command1.ExecuteReader();
+
+                    while (reader1.Read())
                     {
-                        connection1.Open();
+                        dataGridView3.Rows.Add(reader1[0], reader1[1], reader1[2], reader1[3], reader1[4]);
                     }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
-                        string queryDev = $"select {d}.{d}, {d}.deviceID, {d}.userID, {d}.sdatetimeSTR, " +
-                                $"{d}.edatetimeSTR from {d} where {d}.userID = '{_numberPerson}' " +
-                                $"order by {d}.{d} desc";
 
-                        command1 = new MySqlCommand(queryDev, connection1);
-                        MySqlDataReader reader1 = command1.ExecuteReader();
-
-                        while (reader1.Read())
-                        {
-                            dataGridView3.Rows.Add(reader1[0], reader1[1], reader1[2], reader1[3], reader1[4]);
-                        }
-
-                        reader1.Close();
-                        connection1.Close();
-
-                    }
+                    reader1.Close();
+                    connection1.Close();
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         private void button5_Click(object sender, EventArgs e) // статистика
@@ -298,13 +269,6 @@ namespace WinFormsApp1
                     try
                     {
                         connection.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
                         string queryDevq1 = $"select * from {d} order by {d}.{d} desc limit 1;"; // выд
                         command = new MySqlCommand(queryDevq1, connection);
                         reader = command.ExecuteReader();
@@ -322,9 +286,13 @@ namespace WinFormsApp1
                                 label11.Text = $"{++counter2}";
                             }
                         }
-                        
+
                         reader.Close();
                         connection.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                 }
             }
@@ -395,13 +363,6 @@ namespace WinFormsApp1
                     try
                     {
                         connection.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
                         string query = $"insert into {_deviceNumber} (deviceID,userID,sdatetimeSTR,edatetimeSTR) values ('{_deviceNumber}','{_numberPerson}','{DateTime.Now}','');";
 
                         MySqlCommand command = new MySqlCommand(query, connection);
@@ -414,7 +375,10 @@ namespace WinFormsApp1
 
                         reader.Close();
                         connection.Close();
-
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                     _numberPerson = "";
                     _deviceNumber = "";
@@ -426,13 +390,6 @@ namespace WinFormsApp1
                     try
                     {
                         connection.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
                         string query = $"UPDATE {_deviceNumber} SET edatetimeSTR = '{DateTime.Now}' WHERE edatetimeSTR = '';";
 
                         MySqlCommand command = new MySqlCommand(query, connection);
@@ -445,7 +402,10 @@ namespace WinFormsApp1
 
                         reader.Close();
                         connection.Close();
-
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
                     _numberPerson = "";
                     _deviceNumber = "";
@@ -472,13 +432,6 @@ namespace WinFormsApp1
                     try
                     {
                         connection.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
                         string query = $"insert into {_deviceNumberCo} (deviceID,userID,sdatetimeSTR,edatetimeSTR) values ('{_deviceNumberCo}','{_personNumber}','{DateTime.Now}','');";
 
                         MySqlCommand command = new MySqlCommand(query, connection);
@@ -491,7 +444,10 @@ namespace WinFormsApp1
 
                         reader.Close();
                         connection.Close();
-
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
 
                     label28.Text = $"{_deviceNumberCo} выдан";
@@ -513,13 +469,6 @@ namespace WinFormsApp1
                     try
                     {
                         connection.Open();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                    finally
-                    {
                         string query = $"UPDATE {_deviceNumberCo} SET edatetimeSTR = '{DateTime.Now}' WHERE edatetimeSTR = '';";
 
                         MySqlCommand command = new MySqlCommand(query, connection);
@@ -532,7 +481,10 @@ namespace WinFormsApp1
 
                         reader.Close();
                         connection.Close();
-
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
                     }
 
                     label28.Text = $"{_deviceNumberCo} принят";
@@ -564,13 +516,6 @@ namespace WinFormsApp1
                 try
                 {
                     connection.Open();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
-                finally
-                {
                     MySqlCommand command = new MySqlCommand(query, connection);
                     MySqlDataReader reader = command.ExecuteReader();
 
@@ -582,6 +527,10 @@ namespace WinFormsApp1
                     label26.Text = "Успешно добавлен";
 
                     connection.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
                 }
             }
             else
@@ -599,13 +548,6 @@ namespace WinFormsApp1
             try
             {
                 connection.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
                 MySqlCommand command = new MySqlCommand(query, connection);
                 MySqlDataReader reader = command.ExecuteReader();
 
@@ -613,6 +555,10 @@ namespace WinFormsApp1
                 {
                     dataGridView7.Rows.Add(reader[0], reader[1], reader[2], reader[3]);
                 }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         private void button11_Click(object sender, EventArgs e) // показать 4 форму

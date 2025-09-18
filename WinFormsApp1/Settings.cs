@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml;
+﻿using System.Xml;
 
 namespace WinFormsApp1
 {
@@ -32,32 +27,6 @@ namespace WinFormsApp1
 
             foreach (XmlNode _xNode in _xElem.ChildNodes) // этап установки путей в переменные класса из файла настроек
             {
-                //if (_xNode.Name == "PathOfPhones")
-                //    _pathPhones = _xNode.InnerText;
-
-                //if (_xNode.Name == "PathOfTables")
-                //    _pathPhoneTables = _xNode.InnerText;
-
-                //if (_xNode.Name == "PathOfPowerBanks")
-                //    _pathPowerbank = _xNode.InnerText;
-
-                //if (_xNode.Name == "FileForAnalysis")
-                //{
-                //    _pathFileAnalysis = _xNode.InnerText;
-                //    _NameFileAnalyser = _xNode.Attributes.GetNamedItem("Filename").InnerText;
-                //}
-
-                //if (_xNode.Name == "FileForDataUse")
-                //    _pathDataUses = _xNode.InnerText;
-
-                //if (_xNode.Name == "PathUsersData")
-                //    _pathUsersData = _xNode.InnerText;
-
-                //if (_xNode.Name == "PathdefviceStatus")
-                //    _pathDeviceStatus = _xNode.InnerText;
-
-                // новые настройки 
-
                 if (_xNode.Name == "port")
                    _mysql.port = _xNode.InnerText;
 
