@@ -29,13 +29,13 @@ namespace WinFormsApp1
                     dataGridView.Columns.Add("timeEnd", "Время приема");
                     break;
                 case 1:
-                    dataGridView.Columns.Add("number", "№"); // статистика выдача
+                    // статистика выдача
                     dataGridView.Columns.Add("nameOfDevaces", "Номер устройства");
                     dataGridView.Columns.Add("numberOfUser", "Номер бейджа");
                     dataGridView.Columns.Add("timeStart", "Время выдачи");
                     break;
                 case 2:
-                    dataGridView.Columns.Add("number", "№"); // статистика прием
+                    // статистика прием
                     dataGridView.Columns.Add("nameOfDevaces", "Номер устройства");
                     dataGridView.Columns.Add("numberOfUser", "Номер бейджа");
                     dataGridView.Columns.Add("timeEnd", "Время приема");

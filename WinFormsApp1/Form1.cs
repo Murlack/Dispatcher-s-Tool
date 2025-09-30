@@ -68,9 +68,6 @@ namespace WinFormsApp1
         }
         private void button1_Click_1(object sender, EventArgs e) // вывод истории
         {
-            MySqlConnection conn;
-            MySqlCommand command;
-
             string _nameOfDevice = textBox1.Text;
             int _numberDataShow = (textBox2.Text == "") ? 1 : Convert.ToInt32(textBox2.Text);
             string query = $"select dt.{_nameOfDevice}.{_nameOfDevice}, dt.{_nameOfDevice}.deviceID,dt.{_nameOfDevice}.userID,dt.usersdata.UserNames,dt.usersdata.UserDepartment,dt.{_nameOfDevice}.sdatetimeSTR,dt.{_nameOfDevice}.edatetimeSTR" +
@@ -79,16 +76,16 @@ namespace WinFormsApp1
                 $"order by dt.{_nameOfDevice}.{_nameOfDevice} desc " +
                 $"limit {_numberDataShow};";
 
-            conn = new MySqlConnection(_settings._mysql._strconnect);
+            using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
             try
             {
-                conn.Open();
+                connection.Open();
                 ClearData(dataGridView1);
                 _genColumn.GenCol(this.dataGridView1, 0); // создаем колонны
 
-                command = new MySqlCommand(query, conn);
-                MySqlDataReader reader = command.ExecuteReader();
+                using MySqlCommand command = new MySqlCommand(query, connection);
+                using MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -96,7 +93,7 @@ namespace WinFormsApp1
                 }
 
                 reader.Close();
-                conn.Close();
+                connection.Close();
             }
             catch (MySqlException ex)
             {
@@ -105,17 +102,15 @@ namespace WinFormsApp1
         }
         private List<string> Device()
         {
-            MySqlConnection connection;
-            MySqlCommand command;
             string queryfileforanalysis = $"select NameOfDevice from fileforanalysis";
             List<string> dev = new List<string>();
-            connection = new MySqlConnection(_settings._mysql._strconnect);
+            using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
             try
             {
                 connection.Open();
-                command = new MySqlCommand(queryfileforanalysis, connection);
-                MySqlDataReader reader = command.ExecuteReader();
+                using MySqlCommand command = new MySqlCommand(queryfileforanalysis, connection);
+                using MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -134,30 +129,29 @@ namespace WinFormsApp1
         }
         private void button3_Click(object sender, EventArgs e) // Инветаризация
         {
-            ClearData(dataGridView2);
-            _genColumn.GenCol(dataGridView2, 5);
-
-            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
-            MySqlCommand command;
-            MySqlDataReader reader;
-
-            List<string> dev = Device();
-
-            foreach (string str in dev)
+            try
             {
-                string query = $"SELECT {str}.{str}, {str}.deviceID, usersdata.UserID, " +
-                    $"usersdata.UserNames, usersdata.UserDepartment, {str}.sdatetimeSTR, {str}.edatetimeSTR, " +
-                    $"devicestatus.DeviceDescription, devicestatus.comment " +
-                    $"FROM {str}" +
-                    $" LEFT JOIN devicestatus ON dt.{str}.deviceID = devicestatus.DeviceID " +
-                    $"LEFT JOIN usersdata ON {str}.userID = usersdata.UserID " +
-                    $"ORDER BY {str}.{str} DESC LIMIT 1;";
+                ClearData(dataGridView2);
+                _genColumn.GenCol(dataGridView2, 5);
 
-                try
+                using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+
+                List<string> dev = Device();
+
+                foreach (string str in dev)
                 {
+                    string query = $"SELECT {str}.{str}, {str}.deviceID, usersdata.UserID, " +
+                        $"usersdata.UserNames, usersdata.UserDepartment, {str}.sdatetimeSTR, {str}.edatetimeSTR, " +
+                        $"devicestatus.DeviceDescription, devicestatus.comment " +
+                        $"FROM {str}" +
+                        $" LEFT JOIN devicestatus ON dt.{str}.deviceID = devicestatus.DeviceID " +
+                        $"LEFT JOIN usersdata ON {str}.userID = usersdata.UserID " +
+                        $"ORDER BY {str}.{str} DESC LIMIT 1;";
+
+
                     connection.Open();
-                    command = new MySqlCommand(query, connection);
-                    reader = command.ExecuteReader();
+                    using MySqlCommand command = new MySqlCommand(query, connection);
+                    using MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
@@ -166,30 +160,31 @@ namespace WinFormsApp1
 
                     reader.Close();
                     connection.Close();
+
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show(ex.Message);
-                }
+                dev.Clear();
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
             }
         }
         private void button4_Click(object sender, EventArgs e) // история пользователя
         {
-            MySqlConnection connection, connection1;
-            MySqlCommand command, command1;
+            using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+            using MySqlConnection connection1 = new MySqlConnection(_settings._mysql._strconnect);
+            
             string queryfileforanalysis = $"select NameOfDevice from fileforanalysis";
-
-            connection = new MySqlConnection(_settings._mysql._strconnect);
-            connection1 = new MySqlConnection(_settings._mysql._strconnect);
-
             try
             {
                 connection.Open();
+
                 _numberPerson = (textBox3.Text != "") ? textBox3.Text : "0001"; // бэйдж
                 ClearData(dataGridView3);
                 _genColumn.GenCol(dataGridView3, -1);
-                command = new MySqlCommand(queryfileforanalysis, connection);
-                MySqlDataReader reader = command.ExecuteReader();
+
+                using MySqlCommand command = new MySqlCommand(queryfileforanalysis, connection);
+                using MySqlDataReader reader = command.ExecuteReader();
 
                 List<string> dev = new List<string>();
 
@@ -208,8 +203,8 @@ namespace WinFormsApp1
                             $"{d}.edatetimeSTR from {d} where {d}.userID = '{_numberPerson}' " +
                             $"order by {d}.{d} desc";
 
-                    command1 = new MySqlCommand(queryDev, connection1);
-                    MySqlDataReader reader1 = command1.ExecuteReader();
+                    using MySqlCommand command1 = new MySqlCommand(queryDev, connection1);
+                    using MySqlDataReader reader1 = command1.ExecuteReader();
 
                     while (reader1.Read())
                     {
@@ -219,6 +214,8 @@ namespace WinFormsApp1
                     reader1.Close();
                     connection1.Close();
                 }
+
+                dev.Clear();
             }
             catch (Exception ex)
             {
@@ -227,29 +224,18 @@ namespace WinFormsApp1
         }
         private void button5_Click(object sender, EventArgs e) // статистика
         {
-            MySqlConnection connection;
-            MySqlCommand command;
-            string queryfileforanalysis = $"select NameOfDevice from fileforanalysis";
-
-            connection = new MySqlConnection(_settings._mysql._strconnect);
+            using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
             try
             {
                 connection.Open();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
                 ClearData(dataGridView4);
                 ClearData(dataGridView5);
                 _genColumn.GenCol(dataGridView4, 1);
                 _genColumn.GenCol(dataGridView5, 2);
-
-                command = new MySqlCommand(queryfileforanalysis, connection);
-                MySqlDataReader reader = command.ExecuteReader();
+                string queryfileforanalysis = $"select NameOfDevice from fileforanalysis";
+                using MySqlCommand command = new MySqlCommand(queryfileforanalysis, connection);
+                using MySqlDataReader reader = command.ExecuteReader();
 
                 List<string> dev = new List<string>();
 
@@ -266,35 +252,36 @@ namespace WinFormsApp1
 
                 foreach (string d in dev)
                 {
-                    try
-                    {
-                        connection.Open();
-                        string queryDevq1 = $"select * from {d} order by {d}.{d} desc limit 1;"; // выд
-                        command = new MySqlCommand(queryDevq1, connection);
-                        reader = command.ExecuteReader();
+                    connection.Open();
+                    
+                    string queryDevq1 = $"select deviceID,userID,sdatetimeSTR,edatetimeSTR from {d} order by {d}.{d} desc limit 1;"; // выд
+                    using MySqlCommand command1 = new MySqlCommand(queryDevq1, connection);
+                    using MySqlDataReader reader1 = command1.ExecuteReader();
 
-                        while (reader.Read())
+                    while (reader1.Read())
+                    {
+                        //MessageBox.Show($"{reader[0].ToString()} {reader[1].ToString()} {reader[2].ToString()} {reader[3].ToString()}");
+                        if (reader1[2].ToString() != "" && reader1[3].ToString() == "")//выданы
                         {
-                            if (reader[3].ToString() != "" && reader[4].ToString() == "")
-                            {
-                                dataGridView4.Rows.Add(reader[0], reader[1], reader[2], reader[3]);
-                                label10.Text = $"{++counter1}";
-                            }
-                            else if (reader[3].ToString() != "" && reader[4].ToString() != "")
-                            {
-                                dataGridView5.Rows.Add(reader[0], reader[1], reader[2], reader[4]);
-                                label11.Text = $"{++counter2}";
-                            }
+                            dataGridView4.Rows.Add(reader1[0], reader1[1], reader1[2]);
+                            label10.Text = $"{++counter1}";
                         }
+                        else if (reader1[2].ToString() != "" && reader1[3].ToString() != "")//принят
+                        {
+                            dataGridView5.Rows.Add(reader1[0], reader1[1], reader1[2], reader1[3]);
+                            label11.Text = $"{++counter2}";
+                        }
+                    }
 
-                        reader.Close();
-                        connection.Close();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
+                    reader1.Close();
+                    connection.Close();
                 }
+
+                dev.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
         private void textBox4_KeyUp(object sender, KeyEventArgs e) //авто режим
@@ -340,7 +327,6 @@ namespace WinFormsApp1
                         else
                         {
                             _deviceNumber = _mode;
-                            //_pathOfDevace = _deviceDefinitionName.DeviceDefinition(ref _deviceNumber);
                             _deviceDefinitionName.DeviceDefinition(ref _deviceNumber);
 
                             if (_modeWork == "M001")
@@ -358,15 +344,15 @@ namespace WinFormsApp1
 
                 if (_modeWork == "M001" && _numberPerson != "" && _deviceNumber != "") // выдача
                 {
-                    MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+                    using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
                     try
                     {
                         connection.Open();
                         string query = $"insert into {_deviceNumber} (deviceID,userID,sdatetimeSTR,edatetimeSTR) values ('{_deviceNumber}','{_numberPerson}','{DateTime.Now}','');";
 
-                        MySqlCommand command = new MySqlCommand(query, connection);
-                        MySqlDataReader reader = command.ExecuteReader();
+                        using MySqlCommand command = new MySqlCommand(query, connection);
+                        using MySqlDataReader reader = command.ExecuteReader();
 
                         while (reader.Read())
                         {
@@ -385,15 +371,15 @@ namespace WinFormsApp1
                 }
                 else if (_modeWork == "M002" && _deviceNumber != "") // прием
                 {
-                    MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+                    using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
                     try
                     {
                         connection.Open();
                         string query = $"UPDATE {_deviceNumber} SET edatetimeSTR = '{DateTime.Now}' WHERE edatetimeSTR = '';";
 
-                        MySqlCommand command = new MySqlCommand(query, connection);
-                        MySqlDataReader reader = command.ExecuteReader();
+                        using MySqlCommand command = new MySqlCommand(query, connection);
+                        using MySqlDataReader reader = command.ExecuteReader();
 
                         while (reader.Read())
                         {
@@ -428,14 +414,14 @@ namespace WinFormsApp1
                 {
                     _personNumber = textBox5.Text;
                     _deviceNumberCo = textBox6.Text;
-                    MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+                    using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
                     try
                     {
                         connection.Open();
                         string query = $"insert into {_deviceNumberCo} (deviceID,userID,sdatetimeSTR,edatetimeSTR) values ('{_deviceNumberCo}','{_personNumber}','{DateTime.Now}','');";
 
-                        MySqlCommand command = new MySqlCommand(query, connection);
-                        MySqlDataReader reader = command.ExecuteReader();
+                        using MySqlCommand command = new MySqlCommand(query, connection);
+                        using MySqlDataReader reader = command.ExecuteReader();
 
                         while (reader.Read())
                         {
@@ -465,14 +451,14 @@ namespace WinFormsApp1
                 {
                     _deviceNumberCo = textBox6.Text;
 
-                    MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+                    using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
                     try
                     {
                         connection.Open();
                         string query = $"UPDATE {_deviceNumberCo} SET edatetimeSTR = '{DateTime.Now}' WHERE edatetimeSTR = '';";
 
-                        MySqlCommand command = new MySqlCommand(query, connection);
-                        MySqlDataReader reader = command.ExecuteReader();
+                        using MySqlCommand command = new MySqlCommand(query, connection);
+                        using MySqlDataReader reader = command.ExecuteReader();
 
                         while (reader.Read())
                         {
@@ -507,7 +493,7 @@ namespace WinFormsApp1
         private void button9_Click(object sender, EventArgs e) // добавление пользователя
         {
             string _names, _userId, _department;
-            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+            using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
             if (this.textBox8.Text != "" && this.textBox7.Text != "" && this.textBox9.Text != "")
             {
@@ -516,8 +502,8 @@ namespace WinFormsApp1
                 try
                 {
                     connection.Open();
-                    MySqlCommand command = new MySqlCommand(query, connection);
-                    MySqlDataReader reader = command.ExecuteReader();
+                    using MySqlCommand command = new MySqlCommand(query, connection);
+                    using MySqlDataReader reader = command.ExecuteReader();
 
                     while (reader.Read())
                     {
@@ -543,13 +529,13 @@ namespace WinFormsApp1
             ClearData(this.dataGridView7);
             _genColumn.GenCol(this.dataGridView7, 3);
             string query = $"select * from {_settings._mysql.dataBaseusersdata};";
-            MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
+            using MySqlConnection connection = new MySqlConnection(_settings._mysql._strconnect);
 
             try
             {
                 connection.Open();
-                MySqlCommand command = new MySqlCommand(query, connection);
-                MySqlDataReader reader = command.ExecuteReader();
+                using MySqlCommand command = new MySqlCommand(query, connection);
+                using MySqlDataReader reader = command.ExecuteReader();
 
                 while (reader.Read())
                 {
@@ -573,10 +559,6 @@ namespace WinFormsApp1
         {
             data.Columns.Clear(); // чистим колонны
             data.Rows.Clear(); // чистим строки 
-        } 
-        private void button13_Click(object sender, EventArgs e)
-        {
-            new Form7().Show();
         }
     }
 }

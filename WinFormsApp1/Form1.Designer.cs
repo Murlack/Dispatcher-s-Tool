@@ -56,7 +56,6 @@ namespace WinFormsApp1
             label6 = new Label();
             label2 = new Label();
             panel2 = new Panel();
-            button13 = new Button();
             button12 = new Button();
             button8 = new Button();
             dataGridView2 = new DataGridView();
@@ -402,7 +401,6 @@ namespace WinFormsApp1
             // panel2
             // 
             panel2.BackColor = Color.FromArgb(192, 0, 0);
-            panel2.Controls.Add(button13);
             panel2.Controls.Add(button12);
             panel2.Controls.Add(button8);
             panel2.Controls.Add(dataGridView2);
@@ -413,22 +411,6 @@ namespace WinFormsApp1
             panel2.Name = "panel2";
             panel2.Size = new Size(840, 539);
             panel2.TabIndex = 6;
-            // 
-            // button13
-            // 
-            button13.BackColor = Color.Black;
-            button13.FlatStyle = FlatStyle.Popup;
-            button13.Font = new Font("Segoe UI", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
-            button13.ForeColor = Color.White;
-            button13.Location = new Point(14, 487);
-            button13.Margin = new Padding(3, 4, 3, 4);
-            button13.Name = "button13";
-            button13.Size = new Size(311, 57);
-            button13.TabIndex = 6;
-            button13.Text = "Провести инвентаризацию";
-            button13.UseVisualStyleBackColor = false;
-            button13.Visible = false;
-            button13.Click += button13_Click;
             // 
             // button12
             // 
@@ -1011,12 +993,12 @@ namespace WinFormsApp1
             BackColor = Color.Black;
             ClientSize = new Size(1094, 593);
             Controls.Add(menuStrip1);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Controls.Add(panel6);
             Controls.Add(panel3);
             Controls.Add(panel4);
             Controls.Add(panel10);
-            Controls.Add(panel2);
-            Controls.Add(panel1);
             FormBorderStyle = FormBorderStyle.FixedToolWindow;
             Icon = (Icon)resources.GetObject("$this.Icon");
             MainMenuStrip = menuStrip1;
@@ -1126,7 +1108,6 @@ namespace WinFormsApp1
         private Label label28;
         private Label label27;
         private Button button12;
-        private Button button13;
         private TextBox textBox9;
     }
 }
